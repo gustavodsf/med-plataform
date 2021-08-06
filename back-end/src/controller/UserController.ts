@@ -41,6 +41,10 @@ class UserController {
             throw new Error("Problema no email informado.")
         }
 
+        if(!id){
+            throw new Error("O id não pode ser vazio.");
+        }
+
         try {
             const userService = new UserService();
             const user = userService.updateUser(id, email, name, profile);
@@ -52,7 +56,7 @@ class UserController {
     }
 
     async addUser(request: Request, response: Response) {
-
+        const userService = new UserService();
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         const { email, name, profile } = request.body;
 
@@ -62,6 +66,10 @@ class UserController {
 
         if(!re.test(String(email).toLowerCase())){
             throw new Error("Problema no email informado.")
+        }
+
+        if(userService.getUser(email)){
+            throw new Error("Usuário já cadastrado.")
         }
 
         try {

@@ -1,7 +1,7 @@
 import { Collection, SubCollection, ISubCollection  } from 'fireorm';
 
 
-class Volume {
+class Topic {
     id: string;
     name: string;
     pdf_url: number;
@@ -11,8 +11,8 @@ class Volume {
 class Course {
     id: string;
     name: string;
-    @SubCollection(Volume)
-    volumes: ISubCollection<Volume>;
+    @SubCollection(Topic)
+    topics?: ISubCollection<Topic>;
 }
 
-export { Course }
+export { Course, Topic }
