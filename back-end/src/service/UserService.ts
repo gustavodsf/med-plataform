@@ -49,8 +49,6 @@ class UserService {
         return {"message": "Usuário removido com sucesso!"}
     }
 
-    async find
-
 }
 
 export { UserService };
