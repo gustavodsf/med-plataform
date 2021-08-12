@@ -30,11 +30,10 @@ class CourseService {
         }
     }
 
-
     async deleteCourse(id: string) {
         const courseRepository = getRepository(Course);
         await courseRepository.delete(id);
-        return {"message": "Usuário removido com sucesso!"}
+        return {"message": "Curso removido com sucesso!"}
     }
     
     async addNewCourse(name: string, topics: Array<Topic>) {
@@ -48,16 +47,23 @@ class CourseService {
             await batch.create(child);
         });
         
+        await batch.commit()
         return course;
     }
 
-    async updateCourse(id: string, name: string, topics: ISubCollection<Topic>) {
+    async updateCourse(id: string, name: string, topics: Array<Topic>) {
         const courseRepository = getRepository(Course);
         let course = new Course();
         course.id = id;
         course.name = name;
-        course.topics = topics;
         course = await courseRepository.update(course);
+        course = await courseRepository.findById(id);
+        const batch = await course.topics?.createBatch();
+        topics.forEach( async (child: Topic) => {
+            await batch.update(child);
+        });
+
+        await batch.commit()
         return course;
     }
 

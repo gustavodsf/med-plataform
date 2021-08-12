@@ -10,5 +10,10 @@ class Question {
     options: Array<string>;
     answer: number;
     justification: string;
-    
+    theme: Array<string>;
+    curso_id: string;
+    topic_id: string;
+    simulated: boolean
 }
+
+export { Question }

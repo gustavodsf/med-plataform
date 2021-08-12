@@ -56,19 +56,14 @@ class CourseController {
             response.json(course);
         } catch(error){
             console.error(error);
-            throw new Error("Não foi possível excluir o curso.");
+            throw new Error("Não foi possível adicionar o curso.");
         }
     }
 
     async updateCourse(request: Request, response: Response) {
         const {id,  name, topics } = request.body;
         
-         try {
-            const courseService = new CourseService();
-            const course = await courseService.updateCourse(id, name, topics)
-            response.json(course);
-        } catch(error){
-       if( name.trim() == '' &&  topics.length <= 0){
+        if( name.trim() == '' &&  topics.length <= 0){
             throw new Error("Erro no parâmetro enviados do curso.");
         }
 
@@ -76,8 +71,13 @@ class CourseController {
             throw new Error("O id não pode ser vazio");
         }
 
+         try {
+            const courseService = new CourseService();
+            const course = await courseService.updateCourse(id, name, topics)
+            response.json(course);
+        } catch(error){
             console.error(error);
-            throw new Error("Não foi possível excluir o curso.");
+            throw new Error("Não foi possível alterar o curso.");
         }
     }
 }

@@ -8,6 +8,4 @@ class User {
     profile: string;
 }
 
-
-
 export { User }
