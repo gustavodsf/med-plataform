@@ -6,6 +6,7 @@ class User {
     email: string;
     name: string;
     profile: string;
+    enabled: boolean;
 }
 
 export { User }

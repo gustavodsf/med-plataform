@@ -29,11 +29,11 @@ app.use(
       });
     }
 
-    return response.status(500).json({
+    return response.status(5000).json({
       status: "error",
       message: "Internal Server Error",
     });
   }
 );
 
-app.listen(3000, () => console.log("Server is running"));
+app.listen(5000, () => console.log("Server is running"));

@@ -4,7 +4,6 @@ import { UserService } from '../service/UserService';
 
 class UserController {
 
-
     async getAll(request: Request, response: Response) {
         try {
            const userService = new UserService();
@@ -31,7 +30,7 @@ class UserController {
     async updateUser(request: Request, response: Response) {
 
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const {id,  email, name, profile } = request.body;
+        const {id,  email, name, profile, enabled } = request.body;
 
         if( name.trim() == '' &&  email.trim() == '' && profile.trim() == ''){
             throw new Error("Não foi possível atualizar o usuário.");
@@ -47,7 +46,7 @@ class UserController {
 
         try {
             const userService = new UserService();
-            const user = userService.updateUser(id, email, name, profile);
+            const user = userService.updateUser(id, email, name, profile, enabled);
             return response.json(user);
         } catch(error){
             console.error(error);
@@ -58,7 +57,7 @@ class UserController {
     async addUser(request: Request, response: Response) {
         const userService = new UserService();
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const { email, name, profile } = request.body;
+        const { email, name, profile, enabled } = request.body;
 
         if( name.trim() == '' &&  email.trim() == '' && profile.trim() == ''){
             throw new Error("Os parâmetros do usuário não podem ser vazio.");
@@ -68,13 +67,15 @@ class UserController {
             throw new Error("Problema no email informado.")
         }
 
-        if(userService.getUser(email)){
+        const registered = await userService.getUser(email) 
+        console.log(registered)
+        if(registered){
             throw new Error("Usuário já cadastrado.")
         }
 
         try {
             const userService = new UserService();
-            const user = userService.addNewUser(email, name, profile);
+            const user = await userService.addNewUser(email, name, profile, enabled);
             return response.json(user);
         } catch(error){
             console.error(error);
