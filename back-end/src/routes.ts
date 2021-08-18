@@ -42,7 +42,11 @@ router.post("/question",                  questionController.addQuestion);
 router.delete("/question/:id",            questionController.deleteQuestion);
 
 
-
+// ***********
+//  Email
+// ***********
 router.post("/send/email", sendEmailController.handle);
+router.post("/send/welcome/email", sendEmailController.sendCreateUserMessage);
+
 
 export { router };

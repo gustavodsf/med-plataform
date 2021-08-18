@@ -8,7 +8,8 @@ class MailerService {
   async sendMail(to: string, subject: string, text: string){
     const oauth2Client = new OAuth2(
         process.env.EMAIL_CLIENT_ID,
-        process.env.EMAIL_CLIENT_SECRET
+        process.env.EMAIL_CLIENT_SECRET,
+        'https://developers.google.com/oauthplayground'
     );
 
     oauth2Client.setCredentials({refresh_token: process.env.EMAIL_REFRESH_TOKEN});
@@ -23,6 +24,10 @@ class MailerService {
         clientSecret: process.env.EMAIL_CLIENT_SECRET,
         refreshToken: process.env.EMAIL_REFRESH_TOKEN,
         accessToken: accessToken,
+        expires: 3600
+      },
+      tls: {
+        rejectUnauthorized: false
       }
     });
 
