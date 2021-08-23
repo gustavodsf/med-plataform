@@ -4,6 +4,8 @@ import { Toast } from 'primereact/toast';
 import { UserForm } from "./UserForm";
 import { UserList } from "./UserList";
 import { UserService } from "../../service/UserService";
+import { SendService } from "../../service/SendService";
+import { auth } from '../../service/firebase';
 
 type IUser = {
     id: string;
@@ -38,23 +40,29 @@ export function User(){
             }).catch(() => {
                 //TODO Improve the way to get error 
                 // @ts-ignore: Unreachable code error
-                toast.current.show({severity:'error', summary: 'Error',detail:'Problema ao atualizar o usuário.',life: 3000});
+                toast.current.show({severity:'error', summary: 'Erro',detail:'Problema ao atualizar o usuário.',life: 3000});
                 setLoading(false);
             })
         
         } else {
-            userService.save(data).then(() => {
-                //TODO Improve the way to get error 
-                // @ts-ignore: Unreachable code error
-                toast.current.show({severity:'success', summary: 'Sucesso',detail:'Usuário salvo com sucesso.',life: 3000});
-                getUserList();
-                setLoading(false);
+            const pass = data.password || ''
+            auth.createUserWithEmailAndPassword(data.email, pass).then(() => {
+                userService.save(data).then(async () => {
+                    const sendService = new SendService();
+                    sendService.sendWelcomeMessage(data.email, pass);
+                    //TODO Improve the way to get error 
+                    // @ts-ignore: Unreachable code error
+                    toast.current.show({severity:'success', summary: 'Sucesso',detail:'Usuário salvo com sucesso.',life: 3000});
+                    getUserList();
+                    setLoading(false);
+                   
+                })
             }).catch(() => {
                 //TODO Improve the way to get error 
                 // @ts-ignore: Unreachable code error
                 toast.current.show({severity:'error', summary: 'Error',detail:'Problema ao salvar o usuário.',life: 3000});
                 setLoading(false);
-            })
+            })           
         }
     }
 

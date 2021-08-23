@@ -6,9 +6,8 @@ import { Divider } from 'primereact/divider';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
-import { useEffect, Dispatch, SetStateAction, useRef } from 'react';
+import { useEffect, Dispatch, SetStateAction } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-
 
 type IUser = {
     id: string;

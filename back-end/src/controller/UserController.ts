@@ -68,7 +68,6 @@ class UserController {
         }
 
         const registered = await userService.getUser(email) 
-        console.log(registered)
         if(registered){
             throw new Error("Usuário já cadastrado.")
         }

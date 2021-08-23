@@ -1,18 +1,12 @@
-import { Collection, SubCollection, ISubCollection  } from 'fireorm';
-
-
-class Topic {
-    id: string;
-    name: string;
-    pdf_url: number;
-}
+import { Collection  } from 'fireorm';
+import { Topic } from './Topic';
 
 @Collection()
 class Course {
     id: string;
     name: string;
-    @SubCollection(Topic)
-    topics?: ISubCollection<Topic>;
+    enabled: boolean;
+    topics?: Topic[];
 }
 
-export { Course, Topic }
+export { Course }

@@ -40,19 +40,20 @@ class CourseController {
 
     async addCourse(request: Request, response: Response) {
 
-        const { name, topics } = request.body;
+        const { name, topics, enabled  } = request.body;
         const courseService = new CourseService();
 
         if( name.trim() == '' &&  topics.length <= 0){
             throw new Error("Erro no parâmetro enviados do curso.");
         }
 
-        if( courseService.findByName(name)) {
+        const registered = await courseService.findByName(name)
+        if(registered.length > 0) {
             throw new Error("Curso já cadastrado!");
         }
-
+            
         try {
-            const course = await courseService.addNewCourse(name, topics)
+            const course = await courseService.addNewCourse(name, enabled, topics)
             response.json(course);
         } catch(error){
             console.error(error);
@@ -61,7 +62,7 @@ class CourseController {
     }
 
     async updateCourse(request: Request, response: Response) {
-        const {id,  name, topics } = request.body;
+        const {id,  name, topics, enabled } = request.body;
         
         if( name.trim() == '' &&  topics.length <= 0){
             throw new Error("Erro no parâmetro enviados do curso.");
@@ -73,7 +74,7 @@ class CourseController {
 
          try {
             const courseService = new CourseService();
-            const course = await courseService.updateCourse(id, name, topics)
+            const course = await courseService.updateCourse(id, name, enabled, topics)
             response.json(course);
         } catch(error){
             console.error(error);

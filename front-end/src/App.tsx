@@ -5,12 +5,15 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
-import { User } from './pages/User/User'
+import "./service/firebase"
+
+// import { User } from './pages/User/User'
+import { Course } from './pages/Course/Course'
 
 function App() {
 
     return(<>
-        <User />
+        <Course />
     </>);
 }
 

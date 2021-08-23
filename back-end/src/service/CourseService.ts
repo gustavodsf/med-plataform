@@ -1,69 +1,98 @@
-
+import { runTransaction } from 'fireorm';
 import { getRepository, ISubCollection } from 'fireorm';
-import { Course, Topic } from '../model/Course';
+import { Course } from '../model/Course';
+import { Topic } from '../model/Topic';
 
 class CourseService {
 
     async getAllCourse() {
-        const courses = []
         const courseRepository = getRepository(Course);
-        const docs = await courseRepository.orderByAscending('name').find()
-        for(let i=0; i < docs.length; i++){
-            const topics = await docs[i].topics.find();
-            courses.push({
-                id: docs[i].id,
-                name: docs[i].name,
-                topics: topics
-            });
+        const topicRepository = getRepository(Topic);
+        const courses = await courseRepository.orderByAscending("name").find();
+
+        for(let i = 0; i < courses.length; i++) {
+            const id = courses[i].id;
+            const topics = await topicRepository.whereEqualTo("courseId", id).orderByAscending("name").find();
+            courses[i].topics = topics;
         }
         return courses;
     }
 
     async getCourse(id: string) {
-        const courseRepository = getRepository(Course);
-        const doc = await courseRepository.findById(id);
-        const topics = await doc.topics.find();
-        return {
-            id: doc.id,
-            name: doc.name,
-            topics: topics
-        }
+        await runTransaction(async tran => {
+            const courseTranRepository = tran.getRepository(Course);
+            const topicTranRepository = tran.getRepository(Topic);
+            const course = await courseTranRepository.findById(id);
+            const topics = await topicTranRepository.whereEqualTo("courseId", course.id).orderByAscending("name").find();
+            course.topics = topics;
+            return course;
+        });
     }
 
     async deleteCourse(id: string) {
-        const courseRepository = getRepository(Course);
-        await courseRepository.delete(id);
+        await runTransaction(async tran => {
+            const courseTranRepository = tran.getRepository(Course);
+            const topicTranRepository = tran.getRepository(Topic);
+            const course = await courseTranRepository.findById(id);
+            const topics = await topicTranRepository.whereEqualTo("courseId", course.id).find();
+            topics.forEach( async (child: Topic) => {
+                await topicTranRepository.delete(child.id);
+            });
+            await courseTranRepository.delete(id);
+        });
         return {"message": "Curso removido com sucesso!"}
     }
     
-    async addNewCourse(name: string, topics: Array<Topic>) {
-        const courseRepository = getRepository(Course);
+    async addNewCourse(name: string, enabled: boolean, topics: Array<Topic>) {
+        
         let course = new Course();
         course.name = name;
-        course = await courseRepository.create(course);
-        const batch = await course.topics?.createBatch();
+        course.enabled = enabled;
 
-        topics.forEach( async (child: Topic) => {
-            await batch.create(child);
+        await runTransaction(async tran => {
+            const courseTranRepository = tran.getRepository(Course);
+            const topicTranRepository = tran.getRepository(Topic);
+            course = await courseTranRepository.create(course);
+            topics.forEach( async (child: Topic) => {
+                child.courseId = course.id;
+                await topicTranRepository.create(child);
+            });
         });
-        
-        await batch.commit()
         return course;
     }
 
-    async updateCourse(id: string, name: string, topics: Array<Topic>) {
-        const courseRepository = getRepository(Course);
+    async updateCourse(id: string, name: string, enabled: boolean, topics: Array<Topic>) {
         let course = new Course();
-        course.id = id;
         course.name = name;
-        course = await courseRepository.update(course);
-        course = await courseRepository.findById(id);
-        const batch = await course.topics?.createBatch();
-        topics.forEach( async (child: Topic) => {
-            await batch.update(child);
+        course.id = id;
+        course.enabled = enabled;
+
+        await runTransaction(async tran => {
+            const courseTranRepository = tran.getRepository(Course);
+            const topicTranRepository = tran.getRepository(Topic);
+            const topicsDB = await topicTranRepository.whereEqualTo("courseId", id).find();
+
+            courseTranRepository.update(course);
+            const myIdSet = new Set()
+            for(let i = 0 ; i < topics.length; i++){
+                if(topics[i].hasOwnProperty('id') && topics[i].id != ''){
+                    topicTranRepository.update(topics[i]);
+                    myIdSet.add(topics[i].id);
+                } else {
+                    topics[i].courseId = id;
+                    topicTranRepository.create(topics[i]);
+                }
+            }
+            
+            topicsDB.forEach((topic) => {
+                if(!myIdSet.has(topic.id)){
+                    topicTranRepository.delete(topic.id);
+                }
+            });
+            
+
         });
 
-        await batch.commit()
         return course;
     }
 
