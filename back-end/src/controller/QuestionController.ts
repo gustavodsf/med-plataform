@@ -3,6 +3,17 @@ import { QuestionService } from '../service/QuestionService';
 
 class QuestionController {
 
+    async getAll(request: Request, response: Response) {
+        try {
+            const questionService = new QuestionService();
+            const questions = await questionService.getAllQuestion();
+            return response.json(questions);
+        } catch(error){
+            console.error(error);
+            throw new Error("Não foi possível listar as questões.");
+        }
+    }
+
     async deleteQuestion(request: Request, response: Response) {
         try {
             const id = request.params.id
@@ -52,8 +63,8 @@ class QuestionController {
     }
 
     async addQuestion(request: Request, response: Response) {
-
-        const { proof, question, utterance, options, answer, justification, theme, curso_id, topic_id, simulated } = request.body;
+        console.log(request.body)
+        const { proof, question, utterance, options, answer, justification, theme, course_id, topic_id, simulated } = request.body;
         const questionService = new QuestionService();
 
         if( utterance.trim() == '' &&  options.length <= 0 && !answer){
@@ -61,16 +72,16 @@ class QuestionController {
         }
 
         try {
-            const questionObj = await questionService.addQuestion(proof, question, utterance, options, answer, justification, theme, curso_id, topic_id, simulated)
+            const questionObj = await questionService.addQuestion(proof, question, utterance, options, answer, justification, theme, course_id, topic_id, simulated)
             response.json(questionObj);
         } catch(error){
             console.error(error);
-            throw new Error("Não foi possível adicionar o curso.");
+            throw new Error("Não foi possível adicionar a questáo.");
         }
     }
 
     async updateQuestion(request: Request, response: Response) {
-        const { id, proof, question, utterance, options, answer, justification, theme, curso_id, topic_id, simulated } = request.body;
+        const { id, proof, question, utterance, options, answer, justification, theme, course_id, topic_id, simulated } = request.body;
         const questionService = new QuestionService();
 
         if( utterance.trim() == '' &&  options.length <= 0 && !answer){
@@ -81,12 +92,12 @@ class QuestionController {
             throw new Error("O id não pode ser vazio");
         }
 
-         try {
-            const questionObj = await questionService.updateQuestion(id, proof, question, utterance, options, answer, justification, theme, curso_id, topic_id, simulated)
+        try {
+            const questionObj = await questionService.updateQuestion(id, proof, question, utterance, options, answer, justification, theme, course_id, topic_id, simulated)
             response.json(questionObj);
         } catch(error){
             console.error(error);
-            throw new Error("Não foi possível alterar o curso.");
+            throw new Error("Não foi possível alterar a questáo.");
         }
     }
 }

@@ -8,13 +8,13 @@ import 'primeflex/primeflex.css';
 import "./service/firebase"
 
 // import { User } from './pages/User/User'
-import { Course } from './pages/Course/Course'
+// import { Course } from './pages/Course/Course'
+import { Question } from './pages/Question/Question'
 
 function App() {
-
-    return(<>
-        <Course />
-    </>);
+  return(<>
+    <Question />
+  </>);
 }
 
 export default App;

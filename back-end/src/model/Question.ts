@@ -11,7 +11,7 @@ class Question {
     answer: number;
     justification: string;
     theme: Array<string>;
-    curso_id: string;
+    course_id: string;
     topic_id: string;
     simulated: boolean
 }

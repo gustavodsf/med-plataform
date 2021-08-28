@@ -5,6 +5,12 @@ import { Question } from '../model/Question';
 
 class QuestionService {
 
+    async getAllQuestion() {
+        const questionRepository = getRepository(Question);
+        const questions = await questionRepository.find();
+        return questions;
+    }
+
     async getQuestionsOfTopic(topic: string) {
         const questionRepository = getRepository(Question);
         const question = await questionRepository.whereEqualTo(crs => crs.topic_id, topic).find();
@@ -33,7 +39,7 @@ class QuestionService {
     }
 
     async addQuestion(proof: string, question: string, utterance: string, options: Array<string>,
-                       answer: number, justification: string, theme: Array<string>, curso_id: string,
+                       answer: number, justification: string, theme: Array<string>, course_id: string,
                        topic_id: string, simulated: boolean){
         const questionRepository = getRepository(Question);
         let questionObj = new Question();
@@ -44,7 +50,7 @@ class QuestionService {
         questionObj.answer = answer;
         questionObj.justification = justification; 
         questionObj.theme = theme; 
-        questionObj.curso_id = curso_id;
+        questionObj.course_id = course_id;
         questionObj.topic_id = topic_id;
         questionObj.simulated = simulated;                
         questionObj = await questionRepository.create(questionObj);
@@ -53,7 +59,7 @@ class QuestionService {
 
     async updateQuestion(id: string, proof: string, question: string, utterance: string, 
                          options: Array<string>, answer: number, justification: string,
-                         theme: Array<string>, curso_id: string, topic_id: string, simulated: boolean){
+                         theme: Array<string>, course_id: string, topic_id: string, simulated: boolean){
         const questionRepository = getRepository(Question);
         let questionObj = new Question();
         questionObj.id = id;
@@ -64,10 +70,10 @@ class QuestionService {
         questionObj.answer = answer;
         questionObj.justification = justification; 
         questionObj.theme = theme; 
-        questionObj.curso_id = curso_id;
+        questionObj.course_id = course_id;
         questionObj.topic_id = topic_id;
         questionObj.simulated = simulated; 
-        questionObj = await questionRepository.create(questionObj);
+        questionObj = await questionRepository.update(questionObj);
         return questionObj;
     }
 
