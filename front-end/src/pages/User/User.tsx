@@ -1,4 +1,5 @@
 import { auth } from '../../service/firebase';
+import { Divider } from 'primereact/divider';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { SendService } from "../../service/SendService";
 import { Toast } from 'primereact/toast';
@@ -123,16 +124,26 @@ export function User(){
         />) : (<></>)
       }
     </div>
-    <UserForm
-      userSelected={userSelected}
-      setUserSelected={setUserSelected}
-      handleSave={handleSave}
-      handleDelete={handleDelete}
-    />
-    <UserList 
-      userList={userList}
-      setUserSelected={setUserSelected}
-      userSelected={userSelected}
-    />
+    <Divider align="center">
+      <span className="my-page-header">Formulário do Usuário</span> 
+    </Divider>
+    <div className="my-from"> 
+      <UserForm
+        userSelected={userSelected}
+        setUserSelected={setUserSelected}
+        handleSave={handleSave}
+        handleDelete={handleDelete}
+      />
+    </div>
+    <Divider align="center" >
+      <span className="my-page-header">Lista de Usuário</span> 
+    </Divider>
+    <div className="my-list"> 
+      <UserList 
+        userList={userList}
+        setUserSelected={setUserSelected}
+        userSelected={userSelected}
+      />
+    </div>
   </>);
 }

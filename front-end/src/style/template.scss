@@ -1,0 +1,32 @@
+
+.p-menubar.p-component{
+  height: 12vh;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+
+  .header{
+    width: 100%;
+    height: 12vh;
+    background-color: var(--gray-100);
+  }
+
+  .body{
+    width: 100%;
+    height: 88vh;
+    background-color: var(--gray-50);
+    padding: 2rem;
+  }
+}
+
+.p-divider-content {
+  background-color: var(--gray-50);
+}
+
+.my-page-header{
+  padding: 0.1rem;
+  background-color: var(--gray-50);
+}
+

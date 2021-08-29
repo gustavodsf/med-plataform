@@ -129,10 +129,10 @@ export function UserForm(props: UserFormProps){
   }
 
   return(<>
-    <h4 className="p-text p-mb-4">Adicionar Usuário</h4> 
     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-      <div className="p-field p-mr-2 p-mb-4">
-        <span className="p-float-label">
+      <div className="p-fluid p-formgrid p-grid">
+        <div className="p-field p-col">
+          <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Nome*</label>
           <Controller 
             name="name"
             control={control}
@@ -146,42 +146,57 @@ export function UserForm(props: UserFormProps){
               />
             )} 
           />
-          <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Nome*</label>
-        </span>
-        {getFormErrorMessage('name')}
-      </div>
-
-      <div className="p-field p-mr-2 p-mb-4">
-        <span className="p-float-label p-input-icon-right">
-            <i className="pi pi-envelope" />
-            <Controller 
-              name="email"
-              control={control}
-              rules={
-                { 
-                  required: 'Email é obrigatório.', 
-                  pattern: { 
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                      message: 'Endereço de email inválido.  E.x. examplo@email.com'
-                  }
+          {getFormErrorMessage('name')}
+        </div>
+        <div className="p-field p-col">
+          <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>Email*</label>
+          <Controller 
+            name="email"
+            control={control}
+            rules={
+              { 
+                required: 'Email é obrigatório.', 
+                pattern: { 
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    message: 'Endereço de email inválido.  E.x. examplo@email.com'
                 }
               }
-              render={({ field, fieldState }) => (
-                <InputText 
-                  id={field.name}
-                  disabled={userSelected !== undefined}
-                  {...field} 
-                  className={classNames({ 'p-invalid': fieldState.invalid })}
-                />
-            )} />
-            <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>Email*</label>
-          </span>
+            }
+            render={({ field, fieldState }) => (
+              <InputText 
+                id={field.name}
+                disabled={userSelected !== undefined}
+                {...field} 
+                className={classNames({ 'p-invalid': fieldState.invalid })}
+              />
+          )} />
           {getFormErrorMessage('email')}
         </div>
-        {
-          userSelected ? <></> :(
-            <div className="p-field p-mr-2 p-mb-4">
-              <span className="p-float-label">
+      </div>
+      <div className="p-fluid p-formgrid p-grid"> 
+        <div className="p-field p-col">
+          <label htmlFor="profile">Perfil</label>
+          <Controller 
+            name="profile"
+            control={control}
+            render={({ field }) => 
+          (   
+            <Dropdown 
+              id={field.name}
+              value={field.value}
+              onChange={(e) => field.onChange(e.value)}
+              options={profiles}
+              optionLabel="name"
+              optionValue="code" 
+              name="profile"
+            />
+          )} />
+        </div>
+        <div className="p-field p-col">
+          {
+            userSelected ? <></> :(
+              <>
+                <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Senha*</label>
                 <Controller 
                   name="password"
                   control={control}
@@ -200,72 +215,55 @@ export function UserForm(props: UserFormProps){
                       strongLabel='Forte'
                     />
                 )} />
-                <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Senha*</label>
-              </span>
-              {getFormErrorMessage('password')}
-            </div>
-          )
-        }
-
-        <div className="p-field p-mr-2 p-mb-4">
-          <span className="p-float-label">
-            <Controller 
-              name="profile"
+                {getFormErrorMessage('password')}
+              </>
+            )
+          }
+        </div>
+      </div>
+      <div className="p-fluid p-formgrid p-grid">
+        <div className="p-field p-col">
+          <div className="p-field-checkbox">
+            <Controller
+              name="enabled"
               control={control}
-              render={({ field }) => 
-            (   
-              <Dropdown 
-                id={field.name}
-                value={field.value}
-                onChange={(e) => field.onChange(e.value)}
-                options={profiles}
-                optionLabel="name"
-                optionValue="code" 
-                name="profile"
-              />
-            )} />
-            <label htmlFor="profile">Perfil</label>
-          </span>
+              rules={{ required: true }}
+              render={({ field, fieldState }) => (
+                <Checkbox
+                  inputId={field.name}
+                  onChange={(e) => field.onChange(e.checked)}
+                  checked={field.value}
+                  className={classNames({ 'p-invalid': fieldState.invalid })}
+                />
+              )} 
+            />
+            <label htmlFor="enabled" className={classNames({ 'p-error': errors.enabled })}>Habilitado*</label>
+          </div>
         </div>
-
-        <div className="p-field-checkbox p-mr-2 p-mb-3">
-          <Controller
-            name="enabled"
-            control={control}
-            rules={{ required: true }}
-            render={({ field, fieldState }) => (
-              <Checkbox
-                inputId={field.name}
-                onChange={(e) => field.onChange(e.checked)}
-                checked={field.value}
-                className={classNames({ 'p-invalid': fieldState.invalid })}
-              />
-            )} 
-          />
-          <label htmlFor="enabled" className={classNames({ 'p-error': errors.enabled })}>Habilitado*</label>
-        </div>
-        <div className="p-d-flex p-mr-2 p-mb-3">
-          <Button 
-            type="submit"
-            label="Enviar"
-            icon="pi pi-check-circle"
-            className="p-button-rounded p-mr-2 p-mb-2" 
-          />
-          <Button 
-            label="Limpar" 
-            className="p-button-rounded p-mr-2 p-mb-2"
-            icon="pi pi-times-circle"
-            onClick={
-              () => {reset(); setUserSelected(undefined);}
-            } 
-          />
-          <Button
-            label="Remover"
-            onClick={() => confirm()}
-            icon="pi pi-trash"
-            className="p-button-rounded p-button-danger p-mb-2" 
-          />
-        </div>
-      </form>
+        <div className="p-field p-col"></div>
+      </div>
+      <div className="p-d-flex p-mr-2 p-mb-3">
+        <Button 
+          type="submit"
+          label="Enviar"
+          icon="pi pi-check-circle"
+          className="p-button-rounded p-mr-2 p-mb-2" 
+        />
+        <Button 
+          label="Limpar" 
+          className="p-button-rounded p-mr-2 p-mb-2"
+          icon="pi pi-times-circle"
+          onClick={
+            () => {reset(); setUserSelected(undefined);}
+          } 
+        />
+        <Button
+          label="Remover"
+          onClick={() => confirm()}
+          icon="pi pi-trash"
+          className="p-button-rounded p-button-danger p-mb-2" 
+        />
+      </div>
+    </form>
     </>)
 }

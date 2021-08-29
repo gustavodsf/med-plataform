@@ -1,9 +1,10 @@
+import { CourseForm } from './CourseForm';
+import { CourseList } from './CourseList';
+import { CourseService } from '../../service/CourseService';
+import { Divider } from 'primereact/divider';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Toast } from 'primereact/toast';
 import { useState, useRef, useEffect } from 'react';
-import { CourseService } from '../../service/CourseService';
-import { CourseForm } from './CourseForm';
-import { CourseList } from './CourseList';
 
 interface ITopic {
   id: string;

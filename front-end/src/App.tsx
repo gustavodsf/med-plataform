@@ -1,19 +1,28 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
 
 import 'primereact/resources/themes/rhea/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
-import "./service/firebase"
+import "./service/firebase";
 
-// import { User } from './pages/User/User'
-// import { Course } from './pages/Course/Course'
-import { Question } from './pages/Question/Question'
+import { Internal } from './pages/Internal';
+import { NotFound } from './pages/NotFound';
+
+
 
 function App() {
   return(<>
-    <Question />
+    <BrowserRouter>
+      <Switch>
+        <Route path="/internal" component={Internal} />
+        <Route path="*" component={NotFound} />
+      </Switch>
+    </BrowserRouter>
+    
   </>);
 }
 
