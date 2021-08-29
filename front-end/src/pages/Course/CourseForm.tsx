@@ -171,30 +171,26 @@ export function CourseForm(props: CourseFormProps){
 
     return(
       <>
-        <div className="p-d-flex p-mr-2 p-mb-3" key={`div_topic_${props.idx}`}>
-          <div className="p-field p-mr-2 p-mb-4">
-            <span className="p-float-label">
+        <div className="p-fluid p-formgrid p-grid" key={`div_topic_${props.idx}`}>
+          <div className="p-field p-col">
+              <label htmlFor="name">Nome</label>
               <InputText 
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 onBlur={() => handleAddTopic()}
               />
-              <label htmlFor="name">Nome</label>
-            </span>
           </div>
-          <div className="p-field p-mr-2 p-mb-4">
-            <span className="p-float-label">
+          <div className="p-field p-col">
+              <label htmlFor="pdf">URL Apostila</label>
               <InputText 
                 name="pdf" 
                 value={url}                              
                 onChange={(e) => setUrl(e.target.value)} 
                 onBlur={() => handleAddTopic()} 
               />
-              <label htmlFor="pdf">URL Apostila</label>
-            </span>
           </div>
-          <div className="p-field p-mr-2 p-mb-4">
+          <div className="p-field p-col my-icon">
             <Button
               onClick={() => removeTopic()}
               icon="pi pi-trash"
@@ -207,10 +203,10 @@ export function CourseForm(props: CourseFormProps){
   }
 
   return(<>
-    <h4 className="p-text p-mb-4">Adicionar Curso</h4> 
-    <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">    
-      <div className="p-field p-mr-2 p-mb-4">
-        <span className="p-float-label">
+    <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+      <div className="p-fluid p-formgrid p-grid">
+        <div className="p-field p-col">
+          <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Nome*</label>
           <Controller 
             name="name"
             control={control}
@@ -224,26 +220,27 @@ export function CourseForm(props: CourseFormProps){
               />
             )} 
           />
-          <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Nome*</label>
-        </span>
-        {getFormErrorMessage('name')}
-      </div>
-      <div className="p-field-checkbox p-mr-2 p-mb-3">
-        <Controller
-          name="enabled"
-          control={control}
-          rules={{ required: false }}
-          render={({ field, fieldState }) => (
-            <Checkbox
-              inputId={field.name}
-              onChange={(e) => field.onChange(e.checked)}
-              checked={field.value}
-              className={classNames({ 'p-invalid': fieldState.invalid })}
+          {getFormErrorMessage('name')}
+        </div>
+        <div className="p-field p-col">
+          <div className="p-field-checkbox">
+            <Controller
+              name="enabled"
+              control={control}
+              rules={{ required: false }}
+              render={({ field, fieldState }) => (
+                <Checkbox
+                  inputId={field.name}
+                  onChange={(e) => field.onChange(e.checked)}
+                  checked={field.value}
+                  className={classNames({ 'p-invalid': fieldState.invalid })}
+                />
+              )} 
             />
-          )} 
-        />
-        <label htmlFor="enabled" className={classNames({ 'p-error': errors.enabled })}>Habilitado</label>
-      </div>  
+            <label htmlFor="enabled" className={classNames({ 'p-error': errors.enabled })}>Habilitado</label>
+          </div>
+        </div>
+      </div>
       <div className="p-d-flex p-mr-2 p-mb-3">
         <Button 
           type="submit"
@@ -265,14 +262,14 @@ export function CourseForm(props: CourseFormProps){
           icon="pi pi-trash"
           className="p-button-rounded p-button-danger p-mb-2" 
         />
-      </div>        
+      </div>
     </form>
     <h5 className="p-text p-mb-4">
       Adicionar Tópicos
       <Button
         onClick={addNewTopic}
         icon="pi pi-plus"
-        className="p-button-rounded"
+        className="p-button-rounded my-add-topic"
       />
     </h5> 
     {

@@ -115,6 +115,9 @@ export function Course(){
 
   return (
     <>
+      <Divider align="center">
+        <span className="my-page-header">Formulário do Curso</span> 
+      </Divider>
       <Toast ref={toast} position="top-right" />
       <div className="spinnerContainer">
         {
@@ -125,17 +128,24 @@ export function Course(){
           />) : (<></>)
         }
       </div>
-      <CourseForm
-        courseSelected={courseSelected}
-        setCourseSelected={setCourseSelected}
-        handleSave={handleSave}
-        handleDelete={handleDelete}
-      />
-      <CourseList
-        courseSelected={courseSelected}
-        setCourseSelected={setCourseSelected}
-        courseList={courseList}
-      />
+      <div className="my-from"> 
+        <CourseForm
+          courseSelected={courseSelected}
+          setCourseSelected={setCourseSelected}
+          handleSave={handleSave}
+          handleDelete={handleDelete}
+        />
+      </div>
+      <Divider align="center" >
+        <span className="my-page-header">Lista de Curso</span> 
+      </Divider>
+      <div className="my-list"> 
+        <CourseList
+          courseSelected={courseSelected}
+          setCourseSelected={setCourseSelected}
+          courseList={courseList}
+        />
+      </div>
     </>
   )
 }
