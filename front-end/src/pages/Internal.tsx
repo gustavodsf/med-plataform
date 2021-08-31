@@ -10,9 +10,9 @@ function Internal() {
   return(
     <Template>
       <Switch>
-        <Route exact path="/internal/user" component={User} />
-        <Route exact path="/internal/course" component={Course} />
-        <Route exact path="/internal/question" component={Question} />
+        <Route exact path="/user" component={User} />
+        <Route exact path="/course" component={Course} />
+        <Route exact path="/question" component={Question} />
       </Switch>
     </Template>
   );

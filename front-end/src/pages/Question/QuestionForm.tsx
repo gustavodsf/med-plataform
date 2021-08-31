@@ -202,10 +202,10 @@ export function QuestionForm(props: QuestionFormProps){
 
   return(
     <>
-      <h4 className="p-text p-mb-4">Adicionar Questão</h4> 
       <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-        <div className="p-field p-mr-2 p-mb-4">
-          <span className="p-float-label">
+        <div className="p-fluid p-formgrid p-grid">
+          <div className="p-field p-col">
+            <label htmlFor="proof" className={classNames({ 'p-error': errors.proof })}>Prova*</label>
             <Controller 
               name="proof"
               control={control}
@@ -219,13 +219,10 @@ export function QuestionForm(props: QuestionFormProps){
                 />
               )} 
             />
-            <label htmlFor="proof" className={classNames({ 'p-error': errors.proof })}>Prova*</label>
-          </span>
-          {getFormErrorMessage('proof')}
-        </div>
-
-        <div className="p-field p-mr-2 p-mb-4">
-          <span className="p-float-label">
+            {getFormErrorMessage('proof')}
+          </div>
+          <div className="p-field p-col">
+            <label htmlFor="question" className={classNames({ 'p-error': errors.question })}>Questão*</label>
             <Controller 
               name="question"
               control={control}
@@ -238,13 +235,12 @@ export function QuestionForm(props: QuestionFormProps){
                 />
               )} 
             />
-            <label htmlFor="question" className={classNames({ 'p-error': errors.question })}>Questão*</label>
-          </span>
-          {getFormErrorMessage('question')}
+            {getFormErrorMessage('question')}
+          </div>
         </div>
-
-        <div className="p-field p-mr-2 p-mb-4">
-          <span className="p-float-label">
+        <div className="p-fluid p-formgrid p-grid">
+          <div className="p-field p-col">
+            <label htmlFor="utterance" className={classNames({ 'p-error': errors.utterance })}>Enunciado*</label>
             <Controller 
               name="utterance"
               control={control}
@@ -259,11 +255,9 @@ export function QuestionForm(props: QuestionFormProps){
                 />
               )} 
             />
-            <label htmlFor="utterance" className={classNames({ 'p-error': errors.utterance })}>Enunciado*</label>
-          </span>
-          {getFormErrorMessage('utterance')}
-        </div>
-
+            {getFormErrorMessage('utterance')}
+          </div>
+        </div>  
         <div className="p-field p-mb-4">
           <label className="p-field p-mb-4">Opções*</label>
           <span className="p-float-label p-mb-4">
@@ -348,8 +342,9 @@ export function QuestionForm(props: QuestionFormProps){
           </span>
         </div>
 
-        <div className="p-field p-mr-2 p-mb-4">
-          <span className="p-float-label">
+        <div className="p-fluid p-formgrid p-grid">
+          <div className="p-field p-col">
+            <label htmlFor="answer" className={classNames({ 'p-error': errors.answer })}>Resposta*</label>
             <Controller 
               name="answer"
               control={control}
@@ -368,34 +363,10 @@ export function QuestionForm(props: QuestionFormProps){
                 />
               )} 
             />
-            <label htmlFor="answer" className={classNames({ 'p-error': errors.answer })}>Resposta*</label>
-          </span>
-          {getFormErrorMessage('answer')}
-        </div>
-
-        <div className="p-field p-mr-2 p-mb-4">
-          <span className="p-float-label">
-            <Controller 
-              name="justification"
-              control={control}
-              rules={{ required: 'Justificativa é obrigatório.' }}
-              render={({ field, fieldState }) => (
-                <InputTextarea 
-                  id={field.name}
-                  {...field}
-                  rows={2} cols={30}
-                  autoResize
-                  className={classNames({ 'p-invalid': fieldState.invalid })}
-                />
-              )} 
-            />
-            <label htmlFor="justification" className={classNames({ 'p-error': errors.justification })}>Justificativa*</label>
-          </span>
-          {getFormErrorMessage('justification')}
-        </div>
-
-        <div className="p-field p-mr-2 p-mb-4">
-          <span className="p-float-label">
+            {getFormErrorMessage('answer')}
+          </div>
+          <div className="p-field p-col">
+            <label htmlFor="theme" className={classNames({ 'p-error': errors.theme })}>Tema*</label>
             <Controller 
               name="theme"
               control={control}
@@ -410,51 +381,72 @@ export function QuestionForm(props: QuestionFormProps){
                 />
               )} 
             />
-            <label htmlFor="theme" className={classNames({ 'p-error': errors.theme })}>Tema*</label>
-          </span>
-          {getFormErrorMessage('theme')}
+            {getFormErrorMessage('theme')}
+          </div>
+        </div>
+
+        <div className="p-fluid p-formgrid p-grid">
+          <div className="p-field p-col">
+            <label htmlFor="justification" className={classNames({ 'p-error': errors.justification })}>Justificativa*</label>
+            <Controller 
+              name="justification"
+              control={control}
+              rules={{ required: 'Justificativa é obrigatório.' }}
+              render={({ field, fieldState }) => (
+                <InputTextarea 
+                  id={field.name}
+                  {...field}
+                  rows={2} cols={30}
+                  autoResize
+                  className={classNames({ 'p-invalid': fieldState.invalid })}
+                />
+              )} 
+            />
+           {getFormErrorMessage('justification')}
+          </div>
         </div>
         
-        <div className="p-field-checkbox p-mr-2 p-mb-3">
-          <Controller
-            name="simulated"
-            control={control}
-            render={({ field, fieldState }) => (
-              <Checkbox
-                inputId={field.name}
-                onChange={(e) => field.onChange(e.checked)}
-                checked={field.value}
-                className={classNames({ 'p-invalid': fieldState.invalid })}
+        <div className="p-fluid p-formgrid p-grid">
+          <div className="p-field p-col">
+            <div className="p-field-checkbox">
+              <Controller
+                name="simulated"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <Checkbox
+                    inputId={field.name}
+                    onChange={(e) => field.onChange(e.checked)}
+                    checked={field.value}
+                    className={classNames({ 'p-invalid': fieldState.invalid })}
+                  />
+                )} 
               />
-            )} 
-          />
-          <label htmlFor="simulated" className={classNames({ 'p-error': errors.simulated })}>Simulado*</label>
+              <label htmlFor="simulated" className={classNames({ 'p-error': errors.simulated })}>Simulado*</label>
+            </div>
+          </div>
         </div>
-
-        <div className="p-field p-mr-2 p-mb-4">
-          <span className="p-float-label">
-            <Controller 
-              name="course_id"
-              control={control}
-              render={({ field }) => 
-            (   
-              <Dropdown 
-                id={field.name}
-                value={field.value}
-                onChange={(e) => field.onChange(e.value)}
-                options={couseList}
-                optionLabel="name"
-                optionValue="id" 
-                name="course_id"
-                onBlur={handleFilterTopicList}
-              />
-            )} />
+        <div className="p-fluid p-formgrid p-grid">
+          <div className="p-field p-col">
             <label htmlFor="course_id">Curso</label>
-          </span>
-        </div>
-
-        <div className="p-field p-mr-2 p-mb-4">
-          <span className="p-float-label">
+            <Controller 
+                name="course_id"
+                control={control}
+                render={({ field }) => 
+              (   
+                <Dropdown 
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e) => field.onChange(e.value)}
+                  options={couseList}
+                  optionLabel="name"
+                  optionValue="id" 
+                  name="course_id"
+                  onBlur={handleFilterTopicList}
+                />
+            )} />
+          </div>
+          <div className="p-field p-col">
+            <label htmlFor="course_id">Tópico</label>
             <Controller 
               name="topic_id"
               control={control}
@@ -470,10 +462,8 @@ export function QuestionForm(props: QuestionFormProps){
                 name="topic_id"
               />
             )} />
-            <label htmlFor="topic_id">Tópico</label>
-          </span>
+          </div>
         </div>
-
         <div className="p-d-flex p-mr-2 p-mb-3">
           <Button 
             type="submit"

@@ -1,0 +1,88 @@
+#page-auth {
+  display: flex;
+  align-items: stretch;
+  height: 100vh;
+
+  aside {
+    flex: 10;
+    background-image: url(../assets/bkg_med_one.jpg);
+    background-repeat: rounded;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    padding: 120px 80px;
+
+    img {
+      max-width: 320px;
+    }
+
+    strong {
+      font: 700 42px 'Poppins', sans-serif;
+      line-height: 48px;
+      margin-top: 25px;
+      color: var(--pmr-800);
+    }
+
+    p {
+      font-family: 'Cabin Sketch', cursive;
+      font-size: 32px;
+      line-height: 40px;
+      margin-top: 25px;
+      font-weight: 800;
+      color: var(--pmr-800);
+    }
+
+    .my-destak{
+      color: var( --gray-800);
+    }
+
+  }
+
+  main {
+
+    background-color: var(--white);
+
+    flex: 5;
+
+    padding: 0 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 20rem;
+      align-items: stretch;
+      text-align: center;
+  
+      > img {
+        align-self: center;
+        width: 20rem;
+      }
+
+      .my-captcha {
+        display: flex;
+        justify-content: center;
+      }
+
+      .my-form {
+        padding: 2rem;
+      }
+
+      .my-btn{
+        margin-top: 1rem;
+      }
+
+      .my-btn-reset-pass{
+        margin-top: 1rem;
+      }
+
+    }
+  }
+}

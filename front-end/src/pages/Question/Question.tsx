@@ -1,9 +1,10 @@
-import { useEffect, useState, useRef } from 'react';
+import { Divider } from 'primereact/divider';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { Toast } from 'primereact/toast';
 import { QuestionForm } from './QuestionForm';
 import { QuestionList } from './QuestionList';
 import { QuestionService } from '../../service/QuestionService';
+import { Toast } from 'primereact/toast';
+import { useEffect, useState, useRef } from 'react';
 
 type IQuestion = {
   answer: number;
@@ -122,12 +123,18 @@ export function Question(){
               />) : (<></>)
           }
       </div>
+      <Divider align="center">
+        <span className="my-page-header">Formulário da Questäo</span> 
+      </Divider>
       <QuestionForm
           questionSelected={questionSelected}
           setQuestionSelected={setQuestionSelected}
           handleSave={handleSave}
           handleDelete={handleDelete}
       />
+      <Divider align="center" >
+        <span className="my-page-header">Lista de Questäo</span> 
+      </Divider>
       <QuestionList
           questionSelected={questionSelected}
           setQuestionSelected={setQuestionSelected}
