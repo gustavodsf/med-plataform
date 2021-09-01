@@ -20,18 +20,18 @@
     }
 
     strong {
-      font: 700 42px 'Poppins', sans-serif;
-      line-height: 48px;
-      margin-top: 25px;
+      font: 700 3rem 'Poppins', sans-serif;
+      line-height: 4rem;
+      margin-top: 1rem;
       color: var(--pmr-800);
     }
 
     p {
       font-family: 'Cabin Sketch', cursive;
-      font-size: 32px;
-      line-height: 40px;
-      margin-top: 25px;
-      font-weight: 800;
+      font-size: 2.5rem;
+      line-height: 4rem;
+      margin-top: 1rem;
+      font-weight: 600;
       color: var(--pmr-800);
     }
 
@@ -83,6 +83,24 @@
         margin-top: 1rem;
       }
 
+    }
+    
+    .my-notfound-code{
+      font-family: 'Cabin Sketch', cursive;
+      font-size: 6rem;
+      color: var(--pmr-800);
+      font-weight: 500;
+      padding: 1rem 0rem;
+    
+
+      .my-notfound-code-0{
+        color: var(--gray-800)
+      }
+    }
+
+    .my-notfound-msg{
+      font-size: 1.5rem;
+      font-weight: 700; 
     }
   }
 }

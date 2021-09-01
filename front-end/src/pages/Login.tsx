@@ -94,7 +94,18 @@ function Login(){
   **Event Handler
   */
   const onSubmit = (data: IAccess) => {
-
+    firebase.auth().signInWithEmailAndPassword(data.email, data.password)
+    .then((userCredential) => {
+      // Signed in
+      var user = userCredential.user;
+      console.log(user);
+      // ...
+    })
+    .catch((error) => {
+      //TODO Improve the way to get error 
+      // @ts-ignore: Unreachable code error
+      toast.current.show({severity:'error', summary: 'Erro',detail:'Usuário ou senha inválido.',life: 3000});
+    });
   };
 
   const sendEmailWithPassChange = () => {
@@ -108,7 +119,7 @@ function Login(){
     .catch((error) => {
       //TODO Improve the way to get error 
       // @ts-ignore: Unreachable code error
-      toast.current.show({severity:'success', summary: 'Sucesso',detail:'Não foi possível enviar a alteração de senha.',life: 3000});
+      toast.current.show({severity:'error', summary: 'Erro',detail:'Não foi possível enviar a alteração de senha.',life: 3000});
     });
 
   }

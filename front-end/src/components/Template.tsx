@@ -1,6 +1,7 @@
 import { Menubar } from 'primereact/menubar';
 import { useHistory } from 'react-router-dom'
 import logo from '../assets/logo_med_one.jpeg';
+import { firebase } from '../service/firebase'; 
 
 import '../style/template.scss';
 
@@ -12,6 +13,15 @@ function Template(props:TemplateProps) {
   const history = useHistory();
   const start = <img alt="logo" src={logo}  height="40" className="p-mr-2"></img>
 
+  const handleLogout = () => {
+    firebase.auth().signOut().then(() => {
+      // Sign-out successful.
+      history.push('/login');
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
+ 
   const items = [
     {
       label: 'Configuração',
@@ -20,17 +30,17 @@ function Template(props:TemplateProps) {
         {
           label:'Usuários',
           icon:'pi pi-fw pi-users',
-          command: ()=> history.push('/internal/user')
+          command: ()=> history.push('/app/user')
         },
         {
           label:'Questões',
           icon:'pi pi-fw pi-comment',
-          command: ()=> history.push('/internal/question')
+          command: ()=> history.push('/app/question')
         },
         {
           label:'Cursos',
           icon:'pi pi-fw pi-book',
-          command: ()=> history.push('/internal/course')
+          command: ()=> history.push('/app/course')
         }
       ]
     },
@@ -55,7 +65,7 @@ function Template(props:TemplateProps) {
     {
       label: 'Sair',
       icon: 'pi pi-fw pi-power-off',
-      command: () => console.log('Hello World!!!!')
+      command: () => handleLogout()
     }
   ]
 

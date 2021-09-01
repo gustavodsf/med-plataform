@@ -10,8 +10,8 @@ import 'primeflex/primeflex.css';
 import "./service/firebase";
 
 import { Internal } from './pages/Internal';
-import { NotFound } from './pages/NotFound';
 import { Login } from './pages/Login';
+import { NotFound } from './pages/NotFound';
 
 
 
@@ -20,7 +20,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/login" component={Login} />        
-        <Route path="/" component={Internal} />
+        <Route path="/app" component={Internal} />
         <Route path="*" component={NotFound} />
       </Switch>
     </BrowserRouter>
