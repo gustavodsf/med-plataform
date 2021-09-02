@@ -6,8 +6,10 @@ import { Divider } from 'primereact/divider';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
-import { useEffect, Dispatch, SetStateAction } from 'react';
+import { useEffect, useContext} from 'react';
 import { useForm, Controller } from 'react-hook-form';
+
+import { UserContext } from '../../context/UserContext'
 
 type IUser = {
   id: string;
@@ -18,17 +20,11 @@ type IUser = {
   enabled: boolean;
 }
 
-type UserFormProps = {
-  userSelected: IUser | undefined
-  setUserSelected : Dispatch<SetStateAction<IUser |  undefined>>;
-  handleSave: Function;
-  handleDelete: Function;
-}
-
-export function UserForm(props: UserFormProps){
+export function UserForm(){
   /*
   **Framework Variables
   */
+  const { userSelected, setUserSelected, handleSave, handleDelete } = useContext(UserContext);
 
   /*
   **Model Variables
@@ -44,7 +40,6 @@ export function UserForm(props: UserFormProps){
   /*
   **Local Variables
   */
-  const { userSelected, setUserSelected, handleSave, handleDelete } = props;
   const profiles = [
     { "name": "Administrador", "code": "admin" },
     { "name": "Usuário", "code": "user" }
@@ -129,7 +124,7 @@ export function UserForm(props: UserFormProps){
   }
 
   return(<>
-    <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+    <form  className="p-fluid">
       <div className="p-fluid p-formgrid p-grid">
         <div className="p-field p-col">
           <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Nome*</label>
@@ -242,13 +237,17 @@ export function UserForm(props: UserFormProps){
         </div>
         <div className="p-field p-col"></div>
       </div>
-      <div className="p-d-flex p-mr-2 p-mb-3">
+    </form>
+    <div className="p-fluid p-formgrid p-grid">
+      <div className="p-field p-col">
         <Button 
-          type="submit"
           label="Enviar"
           icon="pi pi-check-circle"
+          onClick={handleSubmit(onSubmit)}
           className="p-button-rounded p-mr-2 p-mb-2" 
         />
+      </div>
+      <div className="p-field p-col">
         <Button 
           label="Limpar" 
           className="p-button-rounded p-mr-2 p-mb-2"
@@ -257,13 +256,15 @@ export function UserForm(props: UserFormProps){
             () => {reset(); setUserSelected(undefined);}
           } 
         />
+      </div>
+      <div className="p-field p-col">
         <Button
           label="Remover"
-          onClick={() => confirm()}
+          onClick={confirm}
           icon="pi pi-trash"
           className="p-button-rounded p-button-danger p-mb-2" 
         />
       </div>
-    </form>
+    </div>
     </>)
 }

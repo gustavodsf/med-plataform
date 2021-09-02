@@ -1,7 +1,9 @@
 import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
-import { SetStateAction, Dispatch } from 'react';
+import { useContext } from 'react' 
+
+import { UserContext } from '../../context/UserContext'
 
 type IUser = {
   id: string;
@@ -11,16 +13,11 @@ type IUser = {
   enabled: boolean;
 }
 
-type UserListProps = {
-  userList: Array<IUser>;
-  userSelected: IUser |  undefined;
-  setUserSelected : Dispatch<SetStateAction<IUser |  undefined>>;
-}
-
-export function UserList(props: UserListProps){
+export function UserList(){
   /*
   **Framework Variables
   */
+  const { userList, userSelected, setUserSelected } = useContext(UserContext);
 
   /*
   **Model Variables
@@ -29,10 +26,8 @@ export function UserList(props: UserListProps){
   /*
   **Local Variables
   */
-  const { userList, userSelected, setUserSelected } = props;
   const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
   const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
-
 
   /*
   **Get values from state
