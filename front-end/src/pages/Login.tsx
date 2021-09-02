@@ -1,14 +1,16 @@
-import { useState, useRef } from 'react';
+import { Button } from 'primereact/button';
 import { Captcha } from 'primereact/captcha';
-import logoImg from '../assets/logo_med_one.png';
+import { classNames } from 'primereact/utils';
+import { Dialog } from 'primereact/dialog';
+import { firebase } from '../service/firebase';
+import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useForm, Controller } from 'react-hook-form';
-import { InputText } from 'primereact/inputtext';
-import { classNames } from 'primereact/utils';
-import { Button } from 'primereact/button';
-import { Dialog } from 'primereact/dialog';
-import { Toast } from 'primereact/toast';
-import { firebase } from '../service/firebase';
+import { useHistory } from 'react-router-dom'
+import { useState, useContext, useEffect } from 'react';
+
+import { AuthContext } from '../context/AuthContext'
+import logoImg from '../assets/logo_med_one.png';
 
 import '../style/auth.scss';
 
@@ -21,7 +23,8 @@ function Login(){
   /*
   **Framework Variables
   */
-  const toast = useRef(null);
+  const history = useHistory();
+  const { handleLogin, toast, user} = useContext(AuthContext);
 
   /*
   **Model Variables
@@ -54,7 +57,7 @@ function Login(){
   /*
   **Get values from state
   */
-
+  
   /*
   **Local Methods
   */
@@ -88,25 +91,18 @@ function Login(){
   /*
   **React Methods
   */
-
+  useEffect(()=>{
+    if(user){
+      history.push('/app');
+    }
+  },[user])
 
   /*
   **Event Handler
   */
   const onSubmit = (data: IAccess) => {
-    firebase.auth().signInWithEmailAndPassword(data.email, data.password)
-    .then((userCredential) => {
-      // Signed in
-      var user = userCredential.user;
-      console.log(user);
-      // ...
-    })
-    .catch((error) => {
-      //TODO Improve the way to get error 
-      // @ts-ignore: Unreachable code error
-      toast.current.show({severity:'error', summary: 'Erro',detail:'Usuário ou senha inválido.',life: 3000});
-    });
-  };
+    handleLogin(data);
+  }
 
   const sendEmailWithPassChange = () => {
     firebase.auth().sendPasswordResetEmail(emailChangePass)
@@ -121,7 +117,6 @@ function Login(){
       // @ts-ignore: Unreachable code error
       toast.current.show({severity:'error', summary: 'Erro',detail:'Não foi possível enviar a alteração de senha.',life: 3000});
     });
-
   }
 
   const renderFooter = () => {
@@ -135,7 +130,6 @@ function Login(){
 
   return(
     <div id="page-auth">
-      <Toast ref={toast} position="top-right" />
       <aside>
         <strong>Curso Med One</strong>
         <p><span className="my-destak">O</span>bjetivo ú<span className="my-destak">N</span>ico <span className="my-destak">É</span> Aprovar.</p>
@@ -167,7 +161,7 @@ function Login(){
               )} />
               {getFormErrorMessage('email')}
             </div>
-            <div className="p-fluid p-formgrid p-grid">
+            <div className="p-fluid p-formgrid p-grid p-mb-2">
               <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Senha*</label>
               <Controller 
                 name="password"
@@ -177,7 +171,8 @@ function Login(){
                   <Password 
                     id={field.name} 
                     {...field} 
-                    toggleMask 
+                    toggleMask
+                    feedback={false}
                     className={classNames({ 'p-invalid': fieldState.invalid })} 
                   />
               )} />

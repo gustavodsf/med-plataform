@@ -32,8 +32,7 @@ class CourseService {
   async delete(id: string) {
     const { data } =  await api.delete(`/course/${id}`);
     return data;
-  }
-  
+  }  
 }
 
 export { CourseService }

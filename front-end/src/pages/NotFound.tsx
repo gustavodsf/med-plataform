@@ -29,7 +29,6 @@ function NotFound(){
   **React Methods
   */
 
-
   /*
   **Event Handler
   */

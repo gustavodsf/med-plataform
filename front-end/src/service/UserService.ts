@@ -15,6 +15,11 @@ class UserService {
     return data;
   }
 
+  async getUserById(id: string) {
+    const { data } =  await api.get(`/user/${id}`);
+    return data;
+  }
+
   async save(data: { id: string; email: string; name: string; profile: string; enabled: boolean; password?: string | undefined; }) {
     return await api.post('/user', data);
   }

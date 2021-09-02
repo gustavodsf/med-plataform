@@ -1,7 +1,9 @@
 import { Menubar } from 'primereact/menubar';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+
+import { AuthContext } from '../context/AuthContext'
 import logo from '../assets/logo_med_one.jpeg';
-import { firebase } from '../service/firebase'; 
 
 import '../style/template.scss';
 
@@ -11,17 +13,40 @@ type TemplateProps = {
 
 function Template(props:TemplateProps) {
   const history = useHistory();
+   /*
+  **Framework Variables
+  */
+  const { user, handleLogout } = useContext(AuthContext);
+
+  /*
+  **Model Variables
+  */
+  
+
+  /*
+  **Local Variables
+  */
   const start = <img alt="logo" src={logo}  height="40" className="p-mr-2"></img>
 
-  const handleLogout = () => {
-    firebase.auth().signOut().then(() => {
-      // Sign-out successful.
+  /*
+  **Get values from state
+  */
+
+  /*
+  **Local Methods
+  */
+  useEffect(() => {
+    if(user === undefined) {
       history.push('/login');
-    }).catch((error) => {
-      // An error happened.
-    });
-  }
- 
+    }
+  },[user])
+  /*
+  **React Methods
+  */
+
+  /*
+  **Event Handler
+  */
   const items = [
     {
       label: 'Configuração',
