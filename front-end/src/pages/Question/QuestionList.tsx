@@ -1,7 +1,9 @@
-import { SetStateAction, Dispatch } from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
+import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import { useContext } from 'react';
+
+import { QuestionContext } from '../../context/QuestionContext'
 
 type IQuestion = {
   answer: number;
@@ -17,17 +19,12 @@ type IQuestion = {
   utterance: string
 }
 
-type QuestionListProps = {
-  questionSelected: IQuestion | undefined
-  setQuestionSelected : Dispatch<SetStateAction<IQuestion |  undefined>>;
-  questionList: Array<IQuestion>
-}
-
-export function QuestionList(props: QuestionListProps){
+export function QuestionList(){
 
   /*
   **Framework Variables
   */
+ const { questionSelected, setQuestionSelected, questionList } = useContext(QuestionContext);
 
   /*
   **Model Variables
@@ -36,7 +33,6 @@ export function QuestionList(props: QuestionListProps){
   /*
   **Local Variables
   */
-  const { questionSelected, setQuestionSelected, questionList } = props;
   const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
   const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
 
@@ -61,18 +57,19 @@ export function QuestionList(props: QuestionListProps){
   **Event Handler
   */
   return (<DataTable
-    value={questionList}
-    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-    paginator
     currentPageReportTemplate="Exibindo {first} de {last} até {totalRecords}" 
-    rows={10} 
-    rowsPerPageOptions={[10,20,30]}
+    dataKey="id"
+    emptyMessage="Não foram encontradas questões"
+    onSelectionChange={e => setQuestionSelected(e.value)}
+    paginator
     paginatorLeft={paginatorLeft}
     paginatorRight={paginatorRight}
-    dataKey="id"
-    selectionMode="radiobutton"
+    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+    rows={10} 
+    rowsPerPageOptions={[10,20,30]}
     selection={questionSelected}
-    onSelectionChange={e => setQuestionSelected(e.value)}
+    selectionMode="radiobutton"
+    value={questionList}
   >
       <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
       <Column field="proof" header="Prova"></Column>

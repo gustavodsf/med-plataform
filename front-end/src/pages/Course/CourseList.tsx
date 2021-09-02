@@ -39,6 +39,7 @@ export function CourseList(){
       <DataTable
         currentPageReportTemplate="Exibindo {first} de {last} até {totalRecords}" 
         dataKey="id"
+        emptyMessage="Nenhum curso foi encontrado."
         onSelectionChange={e => setCourseSelected(e.value)}
         paginator
         paginatorLeft={paginatorLeft}

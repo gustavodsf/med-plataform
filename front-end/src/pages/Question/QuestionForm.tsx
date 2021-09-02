@@ -4,11 +4,12 @@ import { confirmDialog } from 'primereact/confirmdialog';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import {Chips} from 'primereact/chips';
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Dropdown } from 'primereact/dropdown';
 import { Checkbox } from 'primereact/checkbox';
 
+import { QuestionContext } from '../../context/QuestionContext'
 import { CourseService } from '../../service/CourseService';
 import { TopicService } from '../../service/TopicService';
 
@@ -45,19 +46,12 @@ type IQuestion = {
   option5?: string;
 }
 
-type QuestionFormProps = {
-  questionSelected: IQuestion | undefined
-  setQuestionSelected : Dispatch<SetStateAction<IQuestion |  undefined>>;
-  handleSave: Function;
-  handleDelete: Function;
-}
-
-export function QuestionForm(props: QuestionFormProps){
+export function QuestionForm(){
 
   /*
   **Framework Variables
   */
-
+  const { questionSelected, setQuestionSelected, handleSave, handleDelete } = useContext(QuestionContext);
   /*
   **Model Variables
   */
@@ -68,7 +62,6 @@ export function QuestionForm(props: QuestionFormProps){
   /*
   **Local Variables
   */
-  const { questionSelected, setQuestionSelected, handleSave, handleDelete } = props;
   const defaultValues = {
     answer: '',
     course_id: '',
@@ -405,7 +398,6 @@ export function QuestionForm(props: QuestionFormProps){
            {getFormErrorMessage('justification')}
           </div>
         </div>
-        
         <div className="p-fluid p-formgrid p-grid">
           <div className="p-field p-col">
             <div className="p-field-checkbox">
@@ -464,13 +456,17 @@ export function QuestionForm(props: QuestionFormProps){
             )} />
           </div>
         </div>
-        <div className="p-d-flex p-mr-2 p-mb-3">
+      </form>
+      <div className="p-fluid p-formgrid p-grid">
+        <div className="p-field p-col">
           <Button 
             type="submit"
             label="Enviar"
             icon="pi pi-check-circle"
             className="p-button-rounded p-mr-2 p-mb-2" 
           />
+        </div>
+        <div className="p-field p-col">
           <Button 
             label="Limpar" 
             className="p-button-rounded p-mr-2 p-mb-2"
@@ -479,6 +475,8 @@ export function QuestionForm(props: QuestionFormProps){
               () => {reset(); setQuestionSelected(undefined);}
             } 
           />
+        </div>
+        <div className="p-field p-col">
           <Button
             label="Remover"
             onClick={() => confirm()}
@@ -486,7 +484,7 @@ export function QuestionForm(props: QuestionFormProps){
             className="p-button-rounded p-button-danger p-mb-2" 
           />
         </div>
-      </form>
+      </div>
     </>
   );
 }

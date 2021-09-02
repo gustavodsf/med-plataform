@@ -59,18 +59,19 @@ export function UserList(){
   */
   return(
     <DataTable
-        value={userList}
-        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-        paginator
         currentPageReportTemplate="Exibindo {first} de {last} até {totalRecords}" 
-        rows={10} 
-        rowsPerPageOptions={[10,20,30]}
+        dataKey="id"
+        emptyMessage="Não foram encontrados usuários"
+        onSelectionChange={e => setUserSelected(e.value)}
+        paginator
         paginatorLeft={paginatorLeft}
         paginatorRight={paginatorRight}
-        dataKey="id"
-        selectionMode="radiobutton"
+        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+        rows={10} 
+        rowsPerPageOptions={[10,20,30]}
         selection={userSelected}
-        onSelectionChange={e => setUserSelected(e.value)}
+        selectionMode="radiobutton"
+        value={userList}
     >
       <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
       <Column field="email" header="Email"></Column>
