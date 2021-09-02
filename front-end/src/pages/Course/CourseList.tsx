@@ -1,7 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
+import { Column } from 'primereact/column';
+import { CourseContext } from '../../context/CourseContext';
+import { DataTable } from 'primereact/datatable';
+import { useContext } from 'react';
 
 interface ITopic {
   id: string;
@@ -17,14 +18,8 @@ interface ICourse {
   topics: Array<ITopic>;
 }
 
-type CourseListProps = {
-  courseList: Array<ICourse>
-  courseSelected: ICourse |  undefined;
-  setCourseSelected : Dispatch<SetStateAction<ICourse |  undefined>>;
-}
-
-export function CourseList(props:CourseListProps){
-  const { courseList, courseSelected, setCourseSelected } = props;
+export function CourseList(){
+  const { courseList, courseSelected, setCourseSelected } = useContext(CourseContext);
 
   const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
   const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;

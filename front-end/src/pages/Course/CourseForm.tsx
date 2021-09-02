@@ -2,10 +2,10 @@ import { Button } from 'primereact/button';
 import { Checkbox } from 'primereact/checkbox';
 import { classNames } from 'primereact/utils';
 import { confirmDialog } from 'primereact/confirmdialog';
-import { Dispatch, SetStateAction } from 'react';
+import { CourseContext } from '../../context/CourseContext';
 import { InputText } from 'primereact/inputtext';
 import { useForm, Controller } from 'react-hook-form';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 type ITopic = {
   id: string;
@@ -21,22 +21,16 @@ type ICourse = {
   topics: Array<ITopic>;
 }
 
-type CourseFormProps = {
-  courseSelected: ICourse | undefined
-  setCourseSelected : Dispatch<SetStateAction<ICourse |  undefined>>;
-  handleSave: Function;
-  handleDelete: Function;
-}
-
 type TopicProps = {
   topic: ITopic;
   idx: number;
 }
 
-export function CourseForm(props: CourseFormProps){
+export function CourseForm(){
   /*
   **Framework Variables
   */
+  const { courseSelected, setCourseSelected, handleSave, handleDelete } = useContext(CourseContext);
 
   /*
   **Model Variables
@@ -49,7 +43,6 @@ export function CourseForm(props: CourseFormProps){
   /*
   **Local Variables
   */
-  const { courseSelected, setCourseSelected, handleSave, handleDelete } = props;
   const { 
     control,
     formState: { errors }, 
@@ -61,11 +54,11 @@ export function CourseForm(props: CourseFormProps){
   **Get values from state
   */
   useEffect(() => {
-  if(courseSelected){
-    setValue('name', courseSelected.name);
-    setValue('enabled', courseSelected.enabled);
-    setTopics(courseSelected.topics);
-  }
+    if(courseSelected){
+      setValue('name', courseSelected.name);
+      setValue('enabled', courseSelected.enabled);
+      setTopics(courseSelected.topics);
+    }
   }, [courseSelected])
   /*
   **Local Methods
@@ -241,29 +234,33 @@ export function CourseForm(props: CourseFormProps){
           </div>
         </div>
       </div>
-      <div className="p-d-flex p-mr-2 p-mb-3">
+    </form>
+    <div className="p-fluid p-formgrid p-grid">
+      <div className="p-field p-col">
         <Button 
-          type="submit"
-          label="Enviar"
+          onClick={handleSubmit(onSubmit)}
+          label="Salvar"
           icon="pi pi-check-circle"
           className="p-button-rounded p-mr-2 p-mb-2" 
         />
+      </div>
+      <div className="p-field p-col">
         <Button 
           label="Limpar" 
           className="p-button-rounded p-mr-2 p-mb-2"
           icon="pi pi-times-circle"
-          onClick={
-            () => handleClean()
-          } 
+          onClick={handleClean} 
         />
+      </div>
+      <div className="p-field p-col">
         <Button
           label="Remover"
-          onClick={() => confirm()}
+          onClick={confirm}
           icon="pi pi-trash"
           className="p-button-rounded p-button-danger p-mb-2" 
         />
       </div>
-    </form>
+    </div>
     <h5 className="p-text p-mb-4">
       Adicionar Tópicos
       <Button

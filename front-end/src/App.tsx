@@ -1,5 +1,4 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 
 import 'primereact/resources/themes/rhea/theme.css';
@@ -21,6 +20,7 @@ function App() {
       <Switch>
         <Route exact path="/login" component={Login} />        
         <Route path="/app" component={Internal} />
+        <Redirect exact from="/" to="/login" />
         <Route path="*" component={NotFound} />
       </Switch>
     </BrowserRouter>
