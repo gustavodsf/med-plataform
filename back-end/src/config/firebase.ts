@@ -12,3 +12,4 @@ admin.initializeApp({
 
 const firestore = admin.firestore();
 fireorm.initialize(firestore);
+export { admin };

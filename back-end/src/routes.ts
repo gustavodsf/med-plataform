@@ -1,10 +1,11 @@
 import { Router } from "express";
-
 import { SendEmailController } from "./controller/SendEmailController";
 import { UserController } from "./controller/UserController";
 import { CourseController } from "./controller/CourseController";
 import { QuestionController } from "./controller/QuestionController";
 import { TopicController } from './controller/TopicController';
+import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
+import { ensureAdmin } from "./middlewares/ensureAdmin";
 
 const router = Router();
 
@@ -18,44 +19,44 @@ const topicController = new TopicController();
 // ***********
 //  USER
 // ***********
-router.get("/user/",       userController.getAll);
-router.get("/user/:id",    userController.getById);
-router.put("/user",        userController.updateUser);
-router.post("/user",       userController.addUser);
-router.delete("/user/:id", userController.deleteUser);
+router.get("/user/",       ensureAdmin, userController.getAll);
+router.get("/user/:id",    ensureAdmin, userController.getById);
+router.put("/user",        ensureAdmin, userController.updateUser);
+router.post("/user",       ensureAdmin, userController.addUser);
+router.delete("/user/:id", ensureAdmin, userController.deleteUser);
 
 // ***********
 //  Curso
 // ***********
-router.get("/course/",       courseController.getAll);
-router.get("/course/:id",    courseController.getById);
-router.put("/course",        courseController.updateCourse);
-router.post("/course",       courseController.addCourse);
-router.delete("/course/:id", courseController.deleteCourse);
+router.get("/course/",       ensureAdmin, courseController.getAll);
+router.get("/course/:id",    ensureAdmin, courseController.getById);
+router.put("/course",        ensureAdmin, courseController.updateCourse);
+router.post("/course",       ensureAdmin, courseController.addCourse);
+router.delete("/course/:id", ensureAdmin, courseController.deleteCourse);
 
 // ***********
 //  Question
 // ***********
-router.get("/question/",                  questionController.getAll);
-router.get("/question/:id",               questionController.getById);
-router.get("/question/simulated/:amount", questionController.getSomeSimulatedQuestions)
-router.get("/question/topic/:topic",      questionController.getQuestionsOfTopic);
-router.put("/question",                   questionController.updateQuestion);
-router.post("/question",                  questionController.addQuestion);
-router.delete("/question/:id",            questionController.deleteQuestion);
+router.get("/question/",                  ensureAdmin, questionController.getAll);
+router.get("/question/:id",               ensureAdmin, questionController.getById);
+router.get("/question/simulated/:amount", ensureAdmin, questionController.getSomeSimulatedQuestions)
+router.get("/question/topic/:topic",      ensureAdmin, questionController.getQuestionsOfTopic);
+router.put("/question",                   ensureAdmin, questionController.updateQuestion);
+router.post("/question",                  ensureAdmin, questionController.addQuestion);
+router.delete("/question/:id",            ensureAdmin, questionController.deleteQuestion);
 // ***********
 //  Topic
 // ***********
-router.get("/topic/", topicController.getAll);
-router.get("/topic/:courseId", topicController.getCourseId);
+router.get("/topic/",          ensureAdmin, topicController.getAll);
+router.get("/topic/:courseId", ensureAdmin, topicController.getCourseId);
 
 
 
 // ***********
 //  Email
 // ***********
-router.post("/send/email", sendEmailController.handle);
-router.post("/send/welcome/email", sendEmailController.sendCreateUserMessage);
+router.post("/send/email",         ensureAdmin, sendEmailController.handle);
+router.post("/send/welcome/email", ensureAdmin, sendEmailController.sendCreateUserMessage);
 
 
 export { router };
