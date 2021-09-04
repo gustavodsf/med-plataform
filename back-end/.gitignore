@@ -106,3 +106,4 @@ dist
 
 .env
 firebase-cred.json
+.vscode/
