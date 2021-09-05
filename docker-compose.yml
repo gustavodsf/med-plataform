@@ -1,1 +1,17 @@
 
+version: "3.9"
+services:
+  front-end:
+    build:
+      context: ${PWD}/front-end/
+      dockerfile: Dockerfile
+    restart: always
+    ports: 
+      - "80:80"
+  back-end:
+    build:
+      context: ${PWD}/back-end/
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "5000:5000"
