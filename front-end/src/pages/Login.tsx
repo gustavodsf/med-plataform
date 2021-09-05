@@ -1,5 +1,4 @@
 import { Button } from 'primereact/button';
-import { Captcha } from 'primereact/captcha';
 import { classNames } from 'primereact/utils';
 import { Dialog } from 'primereact/dialog';
 import { firebase } from '../service/firebase';
@@ -36,8 +35,6 @@ function Login(){
   */
   const [position, setPosition] = useState('center');
   const [displayResponsive, setDisplayResponsive] = useState(false);
-  const [notRobot, setNotRobot] = useState(false)
-  const privateKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
 
   const defaultValues = {
     email: '',
@@ -180,7 +177,6 @@ function Login(){
             </div>
             <div className="my-btn">
               <Button 
-                disabled={!notRobot}
                 type="submit"
                 label="Entrar"
                 icon="pi pi-check-circle"
@@ -188,12 +184,6 @@ function Login(){
               />
             </div>
           </form>
-          <div className="my-captcha">
-            <Captcha 
-              siteKey={privateKey}
-              onResponse={() => setNotRobot(true)}>
-            </Captcha>
-          </div>
           <Button
             className="p-button-rounded p-button-warning my-btn-reset-pass"
             label="Esqueceu a senha?"
