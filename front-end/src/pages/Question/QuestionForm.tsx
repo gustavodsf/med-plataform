@@ -461,7 +461,7 @@ export function QuestionForm(){
         <div className="p-field p-col">
           <Button 
             type="submit"
-            label="Enviar"
+            label="Salvar"
             icon="pi pi-check-circle"
             className="p-button-rounded p-mr-2 p-mb-2" 
           />

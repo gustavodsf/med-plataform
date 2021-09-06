@@ -135,7 +135,7 @@ function Login(){
         <div className="main-content">
           <img src={logoImg} alt="Med One" />
           <form onSubmit={handleSubmit(onSubmit)} className="p-fluid my-form">
-            <div className="p-fluid p-formgrid p-grid">
+            <div className="p-fluid p-formgrid p-grid my-space-btw">
               <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>Email*</label>
               <Controller 
                 name="email"
@@ -190,6 +190,11 @@ function Login(){
             icon="pi pi-external-link"
             onClick={() => onClick()}
           />
+          <div className="digital-ocean-logo">
+            <a href="https://www.digitalocean.com/?refcode=3df8caaf928c&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">
+              <img src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" />
+            </a>
+          </div>
           <Dialog 
               header="Esqueceu a senha?" 
               visible={displayResponsive}

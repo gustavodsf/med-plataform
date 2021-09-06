@@ -27,7 +27,51 @@ function Template(props:TemplateProps) {
   **Local Variables
   */
   const start = <img alt="logo" src={logo}  height="40" className="p-mr-2"></img>
+  const adminMenu = {
+    label: 'Configuração',
+    icon: 'pi pi-fw pi-cog',
+    items:[
+      {
+        label:'Usuários',
+        icon:'pi pi-fw pi-users',
+        command: ()=> history.push('/app/user')
+      },
+      {
+        label:'Questões',
+        icon:'pi pi-fw pi-comment',
+        command: ()=> history.push('/app/question')
+      },
+      {
+        label:'Cursos',
+        icon:'pi pi-fw pi-book',
+        command: ()=> history.push('/app/course')
+      }
+    ]
+  };
 
+  const userMenu = {
+    label: 'Estudo',
+    icon: 'pi pi-fw pi-bookmark',
+    items:[
+      {
+        label:'Material',
+        icon:'pi pi-fw pi-file-o',
+        command: () => handleLogout()
+      },
+      {
+        label:'Questionário',
+        icon:'pi pi-fw pi-list',
+        command: () => handleLogout()
+      },
+      {
+        label:'Simulado',
+        icon:'pi pi-fw pi-compass',
+        command: () => handleLogout()
+      }
+    ]
+  }
+
+  
   /*
   **Get values from state
   */
@@ -35,11 +79,23 @@ function Template(props:TemplateProps) {
   /*
   **Local Methods
   */
-  useEffect(() => {
-    if(user === undefined) {
-      history.push('/login');
+  const items = [];
+  if(user === undefined) {
+    history.push('/login');
+    
+  } else {
+    if(user.profile === 'admin'){
+      items.push(adminMenu);
+    } 
+  }
+  items.push(userMenu);
+  items.push(
+    {
+      label: 'Sair',
+      icon: 'pi pi-fw pi-power-off',
+      command: () => handleLogout()
     }
-  },[user])
+  );
   /*
   **React Methods
   */
@@ -47,53 +103,6 @@ function Template(props:TemplateProps) {
   /*
   **Event Handler
   */
-  const items = [
-    {
-      label: 'Configuração',
-      icon: 'pi pi-fw pi-cog',
-      items:[
-        {
-          label:'Usuários',
-          icon:'pi pi-fw pi-users',
-          command: ()=> history.push('/app/user')
-        },
-        {
-          label:'Questões',
-          icon:'pi pi-fw pi-comment',
-          command: ()=> history.push('/app/question')
-        },
-        {
-          label:'Cursos',
-          icon:'pi pi-fw pi-book',
-          command: ()=> history.push('/app/course')
-        }
-      ]
-    },
-    {
-      label: 'Estudo',
-      icon: 'pi pi-fw pi-bookmark',
-      items:[
-        {
-          label:'Material',
-          icon:'pi pi-fw pi-file-o'
-        },
-        {
-          label:'Questionário',
-          icon:'pi pi-fw pi-list'
-        },
-        {
-          label:'Simulado',
-          icon:'pi pi-fw pi-compass'
-        }
-      ]
-    },
-    {
-      label: 'Sair',
-      icon: 'pi pi-fw pi-power-off',
-      command: () => handleLogout()
-    }
-  ]
-
   return (
     <>
       <div className="container">

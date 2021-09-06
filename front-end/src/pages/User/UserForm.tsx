@@ -6,10 +6,18 @@ import { Divider } from 'primereact/divider';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
-import { useEffect, useContext} from 'react';
+import { CourseService } from '../../service/CourseService';
+import { useEffect, useContext, useState} from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { PickList, PickListChangeParams } from 'primereact/picklist';
 
 import { UserContext } from '../../context/UserContext'
+
+interface ICourse {
+  id: string;
+  name: string;
+  enabled: boolean;
+}
 
 type IUser = {
   id: string;
@@ -18,6 +26,7 @@ type IUser = {
   password?: string;
   profile: string;
   enabled: boolean;
+  courses_id: string[]
 }
 
 export function UserForm(){
@@ -29,12 +38,15 @@ export function UserForm(){
   /*
   **Model Variables
   */
+  const [courseList, setCourseList] = useState(Array<ICourse>());
+  const [source, setSource] = useState(Array<ICourse>());
+  const [target, setTarget] = useState(Array<ICourse>());
   const defaultValues = {
     email: '',
     name: '',
     profile: '',
     password: '',
-    enabled: true
+    enabled: true,
   }
 
   /*
@@ -69,14 +81,19 @@ export function UserForm(){
   /*
   **Get values from state
   */
-  useEffect(()=>{
+  useEffect(() => {
     if(userSelected){
       setValue('email', userSelected.email);
       setValue('name', userSelected.name);
       setValue('profile', userSelected.profile);
       setValue('enabled', userSelected.enabled);
-    }
-  },[userSelected]);
+      if(userSelected.courses_id.length > 0){
+        setTarget(courseList.filter(x => userSelected.courses_id.includes(x.id)));
+        setSource(courseList.filter(x => !userSelected.courses_id.includes(x.id)));
+      }
+    }  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[userSelected])
 
   /*
   **Local Methods
@@ -95,6 +112,15 @@ export function UserForm(){
     }
   };
 
+  const getCourseList = () => {
+    const courseService = new CourseService();
+    courseService.getAllData().then( result => {
+      setCourseList(result);
+      setSource(result);
+    });
+  }
+
+
   const confirm = () => {
     confirmDialog({
       message: 'Tem certeza que deseja remover?',
@@ -107,13 +133,20 @@ export function UserForm(){
   /*
   **React Methods
   */
+  useEffect(()=>{
+    getCourseList();
+  }, [])
 
   /*
   **Event Handler
   */
   const onSubmit = (data: IUser) => {
+    const coursesId = target.map(x => x.id);
+    data.courses_id = coursesId;
     handleSave(data);
     setUserSelected(undefined);
+    setSource(courseList);
+    setTarget([]);
     reset();
   };
 
@@ -121,6 +154,20 @@ export function UserForm(){
     handleDelete();
     setUserSelected(undefined);
     reset();
+  }
+
+  const handleOnChange = (event: PickListChangeParams) => {
+    setSource(event.source);
+    setTarget(event.target);
+  }
+
+
+  const itemTemplate = (item: ICourse) => {
+    return (
+        <div className="product-item">
+          <span>{item.name}</span>
+        </div>
+    );
   }
 
   return(<>
@@ -237,11 +284,24 @@ export function UserForm(){
         </div>
         <div className="p-field p-col"></div>
       </div>
+      <div className="p-fluid p-formgrid p-grid">
+        <div className="p-field p-col">
+          <label>Cursos</label>
+          <PickList
+            source={source}
+            target={target}
+            itemTemplate={itemTemplate}
+            sourceHeader="Disponíveis"
+            targetHeader="Habilitados"
+            onChange={handleOnChange}>  
+          </PickList>
+        </div>
+      </div>
     </form>
     <div className="p-fluid p-formgrid p-grid">
       <div className="p-field p-col">
         <Button 
-          label="Enviar"
+          label="Salvar"
           icon="pi pi-check-circle"
           onClick={handleSubmit(onSubmit)}
           className="p-button-rounded p-mr-2 p-mb-2" 

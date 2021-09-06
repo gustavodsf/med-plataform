@@ -7,6 +7,7 @@ class User {
     name: string;
     profile: string;
     enabled: boolean;
+    courses_id: string[];
 }
 
 export { User }

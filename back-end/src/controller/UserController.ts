@@ -30,7 +30,7 @@ class UserController {
     async updateUser(request: Request, response: Response) {
 
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const {id,  email, name, profile, enabled } = request.body;
+        const {id,  email, name, profile, enabled, courses_id } = request.body;
 
         if( name.trim() == '' &&  email.trim() == '' && profile.trim() == ''){
             throw new Error("Não foi possível atualizar o usuário.");
@@ -46,7 +46,7 @@ class UserController {
 
         try {
             const userService = new UserService();
-            const user = userService.updateUser(id, email, name, profile, enabled);
+            const user = userService.updateUser(id, email, name, profile, enabled, courses_id);
             return response.json(user);
         } catch(error){
             console.error(error);
@@ -57,7 +57,7 @@ class UserController {
     async addUser(request: Request, response: Response) {
         const userService = new UserService();
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const { email, name, profile, enabled } = request.body;
+        const { email, name, profile, enabled, courses_id } = request.body;
 
         if( name.trim() == '' &&  email.trim() == '' && profile.trim() == ''){
             throw new Error("Os parâmetros do usuário não podem ser vazio.");
@@ -74,7 +74,7 @@ class UserController {
 
         try {
             const userService = new UserService();
-            const user = await userService.addNewUser(email, name, profile, enabled);
+            const user = await userService.addNewUser(email, name, profile, enabled, courses_id);
             return response.json(user);
         } catch(error){
             console.error(error);

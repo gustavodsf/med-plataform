@@ -13,6 +13,7 @@ type IUser = {
   profile: string;
   enabled: boolean;
   password?: string;
+  courses_id: string[]
 }
 
 type UserContextType = {

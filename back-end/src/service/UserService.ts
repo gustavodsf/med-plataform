@@ -15,7 +15,7 @@ class UserService {
         return await userRepository.findById(id);
     }
 
-    async addNewUser(email: string, name: string, profile: string, enabled: boolean) {
+    async addNewUser(email: string, name: string, profile: string, enabled: boolean, courses_id: string[]) {
         const userRepository = getRepository(User);
         let user = new User();
         user.id = email;
@@ -23,6 +23,7 @@ class UserService {
         user.name = name;
         user.profile = profile;
         user.enabled = enabled;
+        user.courses_id = courses_id;
         if(profile !== 'user' && profile !== 'admin') {
             user.profile = 'user';
         }
@@ -30,7 +31,7 @@ class UserService {
         return userCreated;
     }
 
-    async updateUser(id: string, email: string, name: string, profile: string, enabled: boolean){
+    async updateUser(id: string, email: string, name: string, profile: string, enabled: boolean, courses_id: string[]){
         const userRepository = getRepository(User);
         let user = new User();
         user.id = id;
@@ -38,6 +39,7 @@ class UserService {
         user.name = name;
         user.profile = profile;
         user.enabled = enabled;
+        user.courses_id = courses_id;
         if(profile !== 'user' && profile !== 'admin') {
             user.profile = 'user';
         }
