@@ -63,7 +63,6 @@ class QuestionController {
     }
 
     async addQuestion(request: Request, response: Response) {
-        console.log(request.body)
         const { proof, question, utterance, options, answer, justification, theme, course_id, topic_id, simulated } = request.body;
         const questionService = new QuestionService();
 

@@ -22,7 +22,6 @@ export async function ensureAdmin(
     // Validar se token é válido
     const result = await admin.auth().verifyIdToken(token)
     if(result){
-      console.log(result);
       return next();
     }
     return response.status(401).end();

@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:lts-alpine as build-step
+FROM node:16-alpine3.11 as build-step
 
 EXPOSE 3000
 
