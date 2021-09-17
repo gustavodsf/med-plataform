@@ -5,6 +5,8 @@ import { CourseController } from "./controller/CourseController";
 import { QuestionController } from "./controller/QuestionController";
 import { TopicController } from './controller/TopicController';
 import { PdfController } from './controller/PdfController';
+import { AnswerController } from './controller/AnswerController';
+
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
 import { ensureAdmin } from "./middlewares/ensureAdmin";
 
@@ -17,6 +19,7 @@ const courseController = new CourseController();
 const questionController = new QuestionController();
 const topicController = new TopicController();
 const pdfController = new PdfController();
+const answerController = new AnswerController();
 
 // ***********
 //  USER
@@ -53,8 +56,6 @@ router.get("/topic/",          ensureAdmin, topicController.getAll);
 router.get("/topic/course/:courseId", ensureAdmin, topicController.getCourseId);
 router.get("/topic/:id", ensureAdmin, topicController.getById);
 
-
-
 // ***********
 //  Email
 // ***********
@@ -66,5 +67,10 @@ router.post("/send/welcome/email", ensureAdmin, sendEmailController.sendCreateUs
 // ***********
 router.get("/pdf/:fileName", ensureAuthenticated, pdfController.getPdfWithName);
 
+// ***********
+// answer
+// ***********
+router.post("/answer", ensureAuthenticated, answerController.add);
+router.get("/answer/:user_id/:topic_id", ensureAuthenticated, answerController.getAnswerByUserTopic);
 
 export { router };

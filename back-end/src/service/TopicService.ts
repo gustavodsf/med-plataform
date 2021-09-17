@@ -16,8 +16,8 @@ class TopicService {
   }
 
   async getTopic(id: string) {
-    const userRepository = getRepository(Topic);
-    return await userRepository.findById(id);
+    const topicRepository = getRepository(Topic);
+    return await topicRepository.findById(id);
   }
 }
 

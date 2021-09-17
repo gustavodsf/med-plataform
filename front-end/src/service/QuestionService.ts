@@ -34,6 +34,11 @@ class QuestionService {
     return data;
   } 
 
+  async getQuestionOfTopic(topicId: string) : Promise<Array<IQuestion>> {
+    const { data } = await api.get(`/question/topic/${topicId}`)
+    return data;
+  }
+
 }
 
 export { QuestionService }

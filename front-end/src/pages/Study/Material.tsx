@@ -66,7 +66,7 @@ function Material(){
         const url = `${process.env.REACT_APP_BACKEND}pdf/${result?.pdf_url}`;
         setTopic(result);
         setConfig({
-          url: 'http://localhost:5000/pdf/APOSTILA TEÓRICA CTI EM VOL 1.pdf',
+          url: url,
           httpHeaders: {
             'Access-Control-Allow-Origin': '*',
             'Authorization': `Bearer ${idToken}`

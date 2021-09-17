@@ -460,7 +460,7 @@ export function QuestionForm(){
       <div className="p-fluid p-formgrid p-grid">
         <div className="p-field p-col">
           <Button 
-            type="submit"
+            onClick={handleSubmit(onSubmit)}
             label="Salvar"
             icon="pi pi-check-circle"
             className="p-button-rounded p-mr-2 p-mb-2" 
