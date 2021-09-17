@@ -4,6 +4,7 @@ import { UserController } from "./controller/UserController";
 import { CourseController } from "./controller/CourseController";
 import { QuestionController } from "./controller/QuestionController";
 import { TopicController } from './controller/TopicController';
+import { PdfController } from './controller/PdfController';
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
 import { ensureAdmin } from "./middlewares/ensureAdmin";
 
@@ -15,6 +16,7 @@ const userController = new UserController();
 const courseController = new CourseController();
 const questionController = new QuestionController();
 const topicController = new TopicController();
+const pdfController = new PdfController();
 
 // ***********
 //  USER
@@ -48,7 +50,8 @@ router.delete("/question/:id",            ensureAdmin, questionController.delete
 //  Topic
 // ***********
 router.get("/topic/",          ensureAdmin, topicController.getAll);
-router.get("/topic/:courseId", ensureAdmin, topicController.getCourseId);
+router.get("/topic/course/:courseId", ensureAdmin, topicController.getCourseId);
+router.get("/topic/:id", ensureAdmin, topicController.getById);
 
 
 
@@ -57,6 +60,11 @@ router.get("/topic/:courseId", ensureAdmin, topicController.getCourseId);
 // ***********
 router.post("/send/email",         ensureAdmin, sendEmailController.handle);
 router.post("/send/welcome/email", ensureAdmin, sendEmailController.sendCreateUserMessage);
+
+// ***********
+//  PDF
+// ***********
+router.get("/pdf/:fileName", ensureAuthenticated, pdfController.getPdfWithName);
 
 
 export { router };

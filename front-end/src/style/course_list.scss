@@ -1,0 +1,30 @@
+.my-topic-container{
+
+  background-color: white;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 14rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid var(--pmr-800);
+  font-family: 'Cabin Sketch', cursive;
+  cursor: pointer;
+
+  &:hover {
+    border: 3px solid var( --gray-800);
+  }
+
+  .logo_med_one{
+    width: 4rem;
+  }
+  
+  .my-container{
+    text-align: center;
+  }
+  
+  .my-div-class{
+    padding: 1rem;
+  }
+}

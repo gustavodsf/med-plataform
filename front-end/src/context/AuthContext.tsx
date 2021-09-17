@@ -14,6 +14,7 @@ type User = {
   id: string;
   email: string | null;
   profile: string | null;
+  courses_id: string[] | null;
 }
 
 type AuthContextType = {
@@ -65,7 +66,8 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         setUser({
           id: uid,
           email: email,
-          profile: dbUser.profile
+          profile: dbUser.profile,
+          courses_id: dbUser.courses_id,
         });
       }
 
@@ -104,7 +106,8 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
             setUser({
               id: result.user.uid,
               email: result.user.email,
-              profile: dbUser.profile
+              profile: dbUser.profile,
+              courses_id: dbUser.courses_id
             });
           } else {
             handleLogout();
@@ -113,8 +116,6 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         }
       }).catch((error) => {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
         //TODO Improve the way to get error 
         // @ts-ignore: Unreachable code error
         toast.current.show({severity:'error', summary: 'Erro',detail:'Usuário ou senha inválido.',life: 3000});
@@ -122,8 +123,6 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
     })
     .catch((error) => {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
       //TODO Improve the way to get error 
       // @ts-ignore: Unreachable code error
       toast.current.show({severity:'error', summary: 'Erro',detail:'Usuário ou senha inválido.',life: 3000});

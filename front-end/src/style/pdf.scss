@@ -1,0 +1,23 @@
+
+.pdfContainer{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+
+  .pdfMenu{
+    width: 50rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    i{
+      cursor:  pointer;
+    }
+  }
+}
+
+.slider-demo .p-slider-horizontal, .slider-demo .p-inputtext {
+  width: 3rem;
+}

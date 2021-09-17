@@ -1,5 +1,7 @@
 import firebase from 'firebase/app';
+import 'firebase/storage';
 import 'firebase/auth';
+
 import * as admin from 'firebase-admin';
 import * as fireorm from 'fireorm';
 
@@ -12,4 +14,5 @@ admin.initializeApp({
 
 const firestore = admin.firestore();
 fireorm.initialize(firestore);
+
 export { admin };

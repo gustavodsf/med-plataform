@@ -56,22 +56,20 @@ function Template(props:TemplateProps) {
       {
         label:'Material',
         icon:'pi pi-fw pi-file-o',
-        command: () => handleLogout()
+        command: () => history.push('/app/study/material')
       },
       {
         label:'Questionário',
         icon:'pi pi-fw pi-list',
-        command: () => handleLogout()
+        command: () => history.push('/app/study/question')
       },
       {
         label:'Simulado',
         icon:'pi pi-fw pi-compass',
-        command: () => handleLogout()
+        command: () => history.push('/app/study/simulated')
       }
     ]
   }
-
-  
   /*
   **Get values from state
   */

@@ -1,10 +1,14 @@
-import { Template } from '../components/Template';
 import { Route, Switch } from 'react-router-dom'
 
-import { User } from '../pages/User/User';
-import { Course } from '../pages/Course/Course';
-import { Question } from '../pages/Question/Question';
-import { Home } from '../pages/Home/Home';
+import { Course }     from '../pages/Course/Course';
+import { CourseList } from '../pages/Study/CourseList'
+import { Home }       from '../pages/Home/Home';
+import { Question }   from '../pages/Question/Question';
+import { Template }   from '../components/Template';
+import { User }       from '../pages/User/User';
+import { Material }       from '../pages/Study/Material';
+import { Query }       from '../pages/Study/Query';
+
 
 function Internal() {
 
@@ -15,6 +19,17 @@ function Internal() {
         <Route exact path="/app/user" component={User} />
         <Route exact path="/app/course" component={Course} />
         <Route exact path="/app/question" component={Question} />
+        <Route exact path="/app/study/material">
+          <CourseList redictFor="material"/>
+        </Route>
+        <Route exact path="/app/study/material/:id" component={Material} />
+        <Route exact path="/app/study/question">
+          <CourseList redictFor="question" />
+        </Route>
+        <Route exact path="/app/study/question/:id" component={Query} />
+        <Route exact path="/app/study/simulated">
+          <CourseList redictFor="simulated" />
+        </Route>
         <Route path="/app/*" component={Home} />
       </Switch>
     </Template>

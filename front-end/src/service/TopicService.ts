@@ -13,6 +13,11 @@ class TopicService {
     const { data } =  await api.get('/topic');
     return data;
   }  
+
+  async getTopicById(id: string) : Promise<ITopic> {
+    const { data } =  await api.get(`/topic/${id}`);
+    return data;
+  }
 }
 
 export { TopicService };

@@ -23,7 +23,19 @@ class TopicController {
       return response.json(topics);
     } catch(error){
         console.error(error);
-        throw new Error("Não foi possível um tópico associado ao curso informado.");
+        throw new Error("Não foi possível localizar um tópico associado ao curso informado.");
+    }
+  }
+
+  async getById(request: Request, response: Response) {
+    try {
+      const id = request.params.id
+      const topicService = new TopicService();
+      const topic = await topicService.getTopic(id);
+      return response.json(topic);
+    } catch(error){
+        console.error(error);
+        throw new Error("Não foi possível localizar um tópico com id informado.");
     }
   }
 }

@@ -15,6 +15,10 @@ class TopicService {
     return topics;
   }
 
+  async getTopic(id: string) {
+    const userRepository = getRepository(Topic);
+    return await userRepository.findById(id);
+  }
 }
 
 export { TopicService };

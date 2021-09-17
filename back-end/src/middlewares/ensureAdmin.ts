@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 import { admin } from '../config/firebase';
+import { UserService } from '../service/UserService';
 
 export async function ensureAdmin(
   request: Request,
@@ -22,11 +23,24 @@ export async function ensureAdmin(
     // Validar se token é válido
     const result = await admin.auth().verifyIdToken(token)
     if(result){
-      return next();
+      const userService = new UserService();
+      const user = await userService.getUser(result.email);
+      if(user.profile ===  "admin"){
+        return next();
+      }
+      else {
+        return response.status(401).json({
+          error: "Unauthorized",
+        });
+      }
     }
-    return response.status(401).end();
+    return response.status(401).json({
+      error: "Unauthorized",
+    });
   } catch (err) {
-    return response.status(401).end();
+    return response.status(401).json({
+      error: "Unauthorized",
+    });
   }
 
 }

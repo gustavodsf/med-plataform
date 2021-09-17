@@ -12,8 +12,14 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap');
     </style>
+     <script type="text/javascript">
+      function handler (event){
+          var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
+          alert ("The Unicode character code is: " + chCode);
+      }
+  </script>
   </head>
-  <body>
+  <body onkeypress="handler">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>

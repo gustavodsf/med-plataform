@@ -5,6 +5,7 @@ import 'primereact/resources/themes/rhea/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
+import 'react-pdf/dist/umd/Page/AnnotationLayer.css';
 
 import "./service/firebase";
 
@@ -12,7 +13,9 @@ import { Internal } from './pages/Internal';
 import { Login } from './pages/Login';
 import { NotFound } from './pages/NotFound';
 import { AuthContextProvider, AuthContext } from './context/AuthContext';
+import { pdfjs } from 'react-pdf';
 
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const PrivateRoute = (props: any) => {
   const { component: Component, ...rest } = props;
