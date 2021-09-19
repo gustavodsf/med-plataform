@@ -55,9 +55,11 @@ export function QuestionContextProvider(props: QuestionContextProviderProps) {
   **Local Methods
   */
   const getQuestionList = () => {
+    setLoading(true);
     const questionService = new QuestionService();
     questionService.getAllData().then( result => {
       setQuestionList(result);
+      setLoading(false);
     });
   }
 

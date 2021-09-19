@@ -3,7 +3,7 @@ import { CourseService } from '../../service/CourseService';
 import { useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext'
-
+import { ProgressSpinner } from 'primereact/progressspinner';
 import logoImg from '../../assets/logo_med_one.jpeg';
 
 import '../../style/course_list.scss';
@@ -40,7 +40,8 @@ function CourseList(props: CourseListProps) {
   **Model Variables
   */
   const [courseList, setCourseList] = useState(Array<ICourse>());
-
+  const [ loading, setLoading ] = useState(false);
+ 
   /*
   **Local Variables
   */
@@ -57,6 +58,7 @@ function CourseList(props: CourseListProps) {
   **React Methods
   */
   useEffect(()=>{
+    setLoading(true);
     const courseService = new CourseService();
     courseService.getAllData().then( result => {
       result = result.filter(x => x.enabled);
@@ -67,6 +69,7 @@ function CourseList(props: CourseListProps) {
           setCourseList(result.filter(x => user.courses_id?.includes(x.id)));
         }
       }
+      setLoading(false);
     });
   }, [])
 
@@ -103,6 +106,13 @@ function CourseList(props: CourseListProps) {
   };
 
   return(<>
+    {
+      loading ? (<ProgressSpinner 
+        style={{width: '30px', height: '30px'}}
+        strokeWidth="8"
+        animationDuration="1s"
+      />) : (<></>)
+    }
     {
       courseList.map(course => {
         return(

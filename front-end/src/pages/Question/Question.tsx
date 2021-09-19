@@ -40,15 +40,13 @@ export function Question(){
 
   return (
     <QuestionContextProvider>
-      <div className="spinnerContainer">
-          {
-              loading ? (<ProgressSpinner 
-                  style={{width: '30px', height: '30px'}}
-                  strokeWidth="8"
-                  animationDuration="1s"
-              />) : (<></>)
-          }
-      </div>
+      {
+          loading ? (<ProgressSpinner 
+              style={{width: '30px', height: '30px'}}
+              strokeWidth="8"
+              animationDuration="1s"
+          />) : (<></>)
+      }
       <Divider align="center">
         <span className="my-page-header">Formulário da Questäo</span> 
       </Divider>

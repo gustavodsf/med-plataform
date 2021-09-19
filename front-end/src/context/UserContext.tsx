@@ -54,9 +54,11 @@ export function UserContextProvider(props: UserContextProviderProps) {
   **Local Methods
   */
   const getUserList = () => {
+    setLoading(true);
     const userService = new UserService();
     userService.getAllData().then( result => {
       setUserList(result);
+      setLoading(false);
     });
   }
   /*

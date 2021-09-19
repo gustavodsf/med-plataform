@@ -7,7 +7,7 @@ class AnswerController {
     
     const { user_id, course_id, topic_id, question_id, user_answer, question_answer } = request.body;
 
-    if(!user_answer){
+    if(user_answer === 0){
         throw new Error("repostas não informada")
     }
 

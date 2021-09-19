@@ -64,9 +64,11 @@ export function CourseContextProvider(props: CourseContextProviderProps) {
   **Local Methods
   */
   const getCourseList = () => {
+    setLoading(true);
     const courseService = new CourseService();
     courseService.getAllData().then( result => {
       setCourseList(result);
+      setLoading(false);
     });
   }
 

@@ -99,7 +99,7 @@ function Query(){
           setQuestion(localQuestion);
           setactualIdx(0);
           setMaxIdx(result.length - 1);
-          const localAnswer = answerResult.find(elem => elem.question_id = localQuestion.id);
+          const localAnswer = answerResult.find(elem => elem.question_id === localQuestion.id);
           if(localAnswer){
             setAnswer(localAnswer.user_answer);
             setIsAnswered(true);
@@ -123,7 +123,7 @@ function Query(){
       course_id: question?.course_id,
       topic_id: question?.topic_id,
       question_id: question?.id,
-      user_answer: answer,
+      user_answer: value,
       question_answer: question?.answer
     }
 
@@ -141,12 +141,23 @@ function Query(){
       setLoading(false);
     });
   }
-
   
   const handleChangeQuestion = (value: number) => {
     const newIdx = (actualIdx || 0) + value;
     setactualIdx(newIdx);
-    setQuestion(questionList[newIdx]);
+    setShowJustification(false);
+    setIsAnswered(false);
+    setAnswer(0);
+
+    const localQuestion = questionList[newIdx]
+    setQuestion(localQuestion);
+    console.log(existingAnswerList);
+    const localAnswer = existingAnswerList.find(elem => elem.question_id === localQuestion.id);
+    console.log(localAnswer);
+    if(localAnswer){
+      setAnswer(localAnswer.user_answer);
+      setIsAnswered(true);
+    }
   }
 
   const header = (
