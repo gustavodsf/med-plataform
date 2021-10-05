@@ -283,23 +283,29 @@ function Query(){
                     onChange={handleRadioClick} checked={answer === 4} />
                   <label htmlFor="opt4">{ question?.options[3] }</label>
               </div>
-              <div className={
-                  isAnswered && question?.answer === 5 ? 
-                  ("p-field-radiobutton correctAnswer") : 
-                  ( isAnswered && answer !== question?.answer  &&  answer === 5  ?
-                  "p-field-radiobutton wrongAnswer":
-                  "p-field-radiobutton"
-                  )
-                }
-              >
-                  <RadioButton 
-                    inputId="opt5"
-                    name="option" 
-                    value={5}
-                    disabled={ answer !== 0 }
-                    onChange={handleRadioClick} checked={answer === 5} />
-                  <label htmlFor="opt5">{ question?.options[4] }</label>
-              </div>
+              {
+                question?.options[4] == '-' ? 
+                (<></>) :
+                (
+                <div className={
+                    isAnswered && question?.answer === 5 ? 
+                    ("p-field-radiobutton correctAnswer") : 
+                    ( isAnswered && answer !== question?.answer  &&  answer === 5  ?
+                    "p-field-radiobutton wrongAnswer":
+                    "p-field-radiobutton"
+                    )
+                  }
+                >
+                    <RadioButton 
+                      inputId="opt5"
+                      name="option" 
+                      value={5}
+                      disabled={ answer !== 0 }
+                      onChange={handleRadioClick} checked={answer === 5} />
+                    <label htmlFor="opt5">{ question?.options[4] }</label>
+                </div>
+                )
+              }
           </div>
         </div>
         {
