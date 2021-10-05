@@ -3,6 +3,7 @@ import { Button } from 'primereact/button';
 import { useParams } from "react-router-dom";
 import { TopicService } from '../../service/TopicService';
 import { Document, Page } from 'react-pdf';
+import { Divider } from 'primereact/divider';
 import { firebase } from '../../service/firebase';
 import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
 
@@ -131,6 +132,7 @@ function Material(){
             <i className="pi pi-caret-right p-px-2"></i>
           </Button>
         </div>
+        <Divider />
         <Document
           file={config}
           renderMode="canvas"
@@ -142,7 +144,37 @@ function Material(){
             pageNumber={pageNumber}
             renderTextLayer={false}
           />
-        </Document>  
+        </Document>
+        <Divider />
+        <div className="pdfMenu">
+          <Button
+            className="p-p-0"
+            onClick={() => handleChangePage(-1)} 
+            disabled={pageNumber === 1}
+          >
+            <i className="pi pi-caret-left p-px-2"></i>
+            <span className="p-px-3">Anterior</span>
+          </Button>
+          <div className="slider-demo">
+            <Dropdown
+              value={myZoom}
+              options={zoomOpt}
+              onChange={handleZoomChange}
+              optionLabel="name"
+              optionValue="code"
+              placeholder="Selecione o zoom" 
+            />
+          </div>
+          <p>Página {pageNumber} de {numPages}</p>
+          <Button 
+            className="p-p-0"
+            onClick={() => handleChangePage(+1)}
+            disabled={pageNumber === numPages}
+          >
+            <span className="p-px-3">Próximo</span>
+            <i className="pi pi-caret-right p-px-2"></i>
+          </Button>
+        </div>
       </div>
     </>
   );
