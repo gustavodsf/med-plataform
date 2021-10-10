@@ -71,7 +71,7 @@ function CourseList(props: CourseListProps) {
       }
       setLoading(false);
     });
-  }, [])
+  }, [user])
 
   /*
   **Event Handler

@@ -6,8 +6,10 @@ import { Home }       from '../pages/Home/Home';
 import { Question }   from '../pages/Question/Question';
 import { Template }   from '../components/Template';
 import { User }       from '../pages/User/User';
-import { Material }       from '../pages/Study/Material';
-import { Query }       from '../pages/Study/Query';
+import { Material }   from '../pages/Study/Material';
+import { Query }      from '../pages/Study/Query';
+import { About }      from '../pages/Home/About';
+import { Help }       from '../pages/Home/Help';
 
 
 function Internal() {
@@ -19,6 +21,8 @@ function Internal() {
         <Route exact path="/app/user" component={User} />
         <Route exact path="/app/course" component={Course} />
         <Route exact path="/app/question" component={Question} />
+        <Route exact path="/app/help" component={Help} />
+        <Route exact path="/app/about" component={About} />
         <Route exact path="/app/study/material">
           <CourseList redictFor="material"/>
         </Route>

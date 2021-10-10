@@ -1,7 +1,7 @@
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { Dialog } from 'primereact/dialog';
-import { firebase } from '../service/firebase';
+import { auth, sendPasswordResetEmail, } from '../service/firebase';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useForm, Controller } from 'react-hook-form';
@@ -92,6 +92,7 @@ function Login(){
     if(user){
       history.push('/app');
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[user])
 
   /*
@@ -102,7 +103,7 @@ function Login(){
   }
 
   const sendEmailWithPassChange = () => {
-    firebase.auth().sendPasswordResetEmail(emailChangePass)
+    sendPasswordResetEmail(auth, emailChangePass)
     .then(() => {
       //TODO Improve the way to get error 
       // @ts-ignore: Unreachable code error

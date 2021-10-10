@@ -108,7 +108,7 @@ function Query(){
         setLoading(false);
       });
     });
-  },[])
+  },[user?.id, id])
   /*
   **Event Handler
   */
@@ -284,7 +284,7 @@ function Query(){
                   <label htmlFor="opt4">{ question?.options[3] }</label>
               </div>
               {
-                question?.options[4] == '-' ? 
+                question?.options[4] === '-' ? 
                 (<></>) :
                 (
                 <div className={

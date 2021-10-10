@@ -5,6 +5,7 @@ import { CourseController } from "./controller/CourseController";
 import { QuestionController } from "./controller/QuestionController";
 import { TopicController } from './controller/TopicController';
 import { PdfController } from './controller/PdfController';
+import { VideoController } from './controller/VideoController';
 import { AnswerController } from './controller/AnswerController';
 
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
@@ -20,6 +21,7 @@ const questionController = new QuestionController();
 const topicController = new TopicController();
 const pdfController = new PdfController();
 const answerController = new AnswerController();
+const videoController = new VideoController();
 
 // ***********
 //  USER
@@ -63,9 +65,10 @@ router.post("/send/email",         ensureAdmin, sendEmailController.handle);
 router.post("/send/welcome/email", ensureAdmin, sendEmailController.sendCreateUserMessage);
 
 // ***********
-//  PDF
+//  files
 // ***********
 router.get("/pdf/:fileName", ensureAuthenticated, pdfController.getPdfWithName);
+router.get("/video/:fileName", videoController.getVideoWithName);
 
 // ***********
 // answer

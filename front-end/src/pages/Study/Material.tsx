@@ -4,18 +4,10 @@ import { useParams } from "react-router-dom";
 import { TopicService } from '../../service/TopicService';
 import { Document, Page } from 'react-pdf';
 import { Divider } from 'primereact/divider';
-import { firebase } from '../../service/firebase';
+import { auth } from '../../service/firebase';
 import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
 
-
 import '../../style/pdf.scss';
-
-interface ITopic {
-  id: string;
-  name: string;
-  pdf_url: string;
-  couseId?: string;
-}
 
 type MaterialParams = {
   id: string;
@@ -35,7 +27,6 @@ function Material(){
 ];
 
   const { id } = useParams<MaterialParams>();
-  const [ topic, setTopic] = useState<ITopic>();
   const [ config, setConfig] = useState<{}>();
   const [ myZoom, setMyZoom] = useState<number>(2.0);
 
@@ -62,10 +53,9 @@ function Material(){
   useEffect(()=>{
     const topicService = new TopicService();
     topicService.getTopicById(id).then(result => {
-      const user = firebase.auth().currentUser;
+      const user = auth.currentUser;
       user?.getIdToken(true).then((idToken) => {
         const url = `${process.env.REACT_APP_BACKEND}pdf/${result?.pdf_url}`;
-        setTopic(result);
         setConfig({
           url: url,
           httpHeaders: {

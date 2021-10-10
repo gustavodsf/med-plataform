@@ -1,6 +1,6 @@
 import { Menubar } from 'primereact/menubar';
 import { useHistory } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 import { AuthContext } from '../context/AuthContext'
 import logo from '../assets/logo_med_one.jpeg';
@@ -54,6 +54,12 @@ function Template(props:TemplateProps) {
     icon: 'pi pi-fw pi-bookmark',
     items:[
       {
+        label:'Vídeos',
+        icon:'pi pi-fw pi-youtube',
+        command: () => history.push('/app/study/video')
+        
+      },
+      {
         label:'Material',
         icon:'pi pi-fw pi-file-o',
         command: () => history.push('/app/study/material')
@@ -78,6 +84,11 @@ function Template(props:TemplateProps) {
   **Local Methods
   */
   const items = [];
+  items.push({
+    label: 'Home',
+    icon: 'pi pi-fw pi-home',
+    command: () => history.push('/app')
+  })
   if(user === undefined) {
     history.push('/login');
     
@@ -88,11 +99,23 @@ function Template(props:TemplateProps) {
   }
   items.push(userMenu);
   items.push(
+    
+    {
+      label: 'Ajuda',
+      icon: 'pi pi-fw pi-question-circle',
+      command: () => history.push('/app/help')
+    },
+    {
+      label: 'Sobre Nós',
+      icon: 'pi pi-fw pi-info-circle',
+      command: () => history.push('/app/about')
+    },
     {
       label: 'Sair',
       icon: 'pi pi-fw pi-power-off',
       command: () => handleLogout()
     }
+
   );
   /*
   **React Methods

@@ -2,21 +2,6 @@ import logoImg from '../assets/logo_med_one.png';
 
 import '../style/auth.scss';
 
-
-interface ITopic {
-  id: string;
-  name: string;
-  pdf_url: string;
-  couseId?: string;
-}
-
-interface ICourse {
-  id: string;
-  name: string;
-  enabled: boolean;
-  topics: Array<ITopic>;
-}
-
 function NotFound(){
   /*
   **Framework Variables

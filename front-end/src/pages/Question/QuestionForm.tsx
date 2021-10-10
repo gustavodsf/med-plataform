@@ -106,6 +106,7 @@ export function QuestionForm(){
       setValue('topic_id',      questionSelected.topic_id);
       setValue('course_id',      questionSelected.course_id);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[questionSelected]);
 
   /*

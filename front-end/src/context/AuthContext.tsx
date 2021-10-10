@@ -2,7 +2,7 @@ import { ReactNode, createContext } from "react";
 import { Toast } from 'primereact/toast';
 import { useRef, MutableRefObject, useEffect, useState } from 'react';
 
-import { firebase } from '../service/firebase';
+import { auth , signInWithEmailAndPassword, browserSessionPersistence, setPersistence} from '../service/firebase';
 import { UserService } from '../service/UserService'
 
 type IAccess = {
@@ -58,7 +58,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
   **React Methods
   */
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const { uid, email } = user
         const userService  = new UserService();
@@ -82,7 +82,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
   **Event Handler
   */
   const handleLogout = () => {
-    firebase.auth().signOut().then(() => {
+    auth.signOut().then(() => {
       // Sign-out successful.
       setUser(undefined);
     }).catch((error) => {
@@ -91,14 +91,14 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
   }
 
   const handleLogin = (data: IAccess) => {
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    setPersistence(auth , browserSessionPersistence)
     .then(() => {
       // Existing and future Auth states are now persisted in the current
       // session only. Closing the window would clear any existing state even
       // if a user forgets to sign out.
       // ...
       // New sign-in will be persisted with session persistence.
-      firebase.auth().signInWithEmailAndPassword(data.email, data.password).then(async (result) => {
+      signInWithEmailAndPassword(auth, data.email, data.password).then(async (result) => {
         if (result.user) {
           const userService  = new UserService();
           const dbUser = await userService.getUserById(data.email);

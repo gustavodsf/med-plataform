@@ -59,6 +59,7 @@ export function CourseForm(){
       setValue('enabled', courseSelected.enabled);
       setTopics(courseSelected.topics);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseSelected])
   /*
   **Local Methods

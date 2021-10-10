@@ -2,7 +2,7 @@ import { ReactNode, createContext } from "react";
 import { Toast } from 'primereact/toast';
 import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
 
-import { auth } from '../service/firebase';
+import { auth, createUserWithEmailAndPassword } from '../service/firebase';
 import { SendService } from "../service/SendService";
 import { UserService } from "../service/UserService";
 
@@ -90,7 +90,7 @@ export function UserContextProvider(props: UserContextProviderProps) {
       })
     } else {
       const pass = data.password || ''
-      auth.createUserWithEmailAndPassword(data.email, pass).then(() => {
+      createUserWithEmailAndPassword(auth, data.email, pass).then(() => {
         userService.save(data).then(async () => {
           const sendService = new SendService();
           sendService.sendWelcomeMessage(data.email, pass);

@@ -43,7 +43,11 @@ class QuestionController {
             const topic = request.params.topic
             const questionService = new QuestionService();
             const question = await questionService.getQuestionsOfTopic(topic);
-            return response.json(question);
+            return response.json(question.sort((a, b) => {
+                    let fa = parseInt(a.question),
+                        fb = parseInt(b.question);
+                    return fa -  fb;
+                }));
         } catch(error){
             console.error(error);
             throw new Error("Não foi possível localizar a questão.");
