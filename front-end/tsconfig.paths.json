@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@context/*": ["src/context/*"],
+      "@course/*": ["src/pages/Course/*"],
+      "@internal/*": ["src/pages/Internal/*"],
+      "@question/*": ["src/pages/Question/*"],
+      "@service/*": ["src/service/*"],
+      "@study/*": ["src/pages/Study/*"],
+      "@style/*": ["src/style/*"],
+      "@user/*": ["src/pages/User/*"],
+    }
+  }
+}
