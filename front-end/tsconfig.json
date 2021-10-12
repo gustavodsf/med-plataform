@@ -1,8 +1,8 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -12,8 +12,7 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext",
-      "es2015"
+      "esnext"
     ],
     "module": "esnext",
     "moduleResolution": "node",
