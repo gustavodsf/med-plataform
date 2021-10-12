@@ -3,15 +3,17 @@ import { getRepository } from 'fireorm';
 import { Topic } from '@model/Topic';
 
 class TopicService {
-
   async getAllTopic() {
     const topicRepository = getRepository(Topic);
-    return await topicRepository.orderByAscending('name').find()
+    return await topicRepository.orderByAscending('name').find();
   }
 
   async getCourseId(courseId: string) {
     const topicRepository = getRepository(Topic);
-    const topics = await topicRepository.whereEqualTo("courseId", courseId).orderByAscending("name").find();
+    const topics = await topicRepository
+      .whereEqualTo('courseId', courseId)
+      .orderByAscending('name')
+      .find();
     return topics;
   }
 

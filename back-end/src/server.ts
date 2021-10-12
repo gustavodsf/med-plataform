@@ -1,16 +1,18 @@
-  
-import "reflect-metadata";
-import "express-async-errors";
-import compression from "compression";
-import cors from "cors";
-import express, { Request, Response, NextFunction } from "express";
-import helmet from "helmet";
+/* eslint-disable @typescript-eslint/no-var-requires */
+import 'express-async-errors';
+import 'reflect-metadata';
+import { Request, Response, NextFunction } from 'express';
+import { router } from './routes';
+import compression from 'compression';
 
-import { router } from "./routes";
-import './config/firebase'
+const cors = require('cors');
+const express = require('express');
+const helmet = require('helmet');
 
+import './config/firebase';
 
-require('dotenv').config()
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 
 const app = express();
 
@@ -30,10 +32,10 @@ app.use(
     }
 
     return response.status(5000).json({
-      status: "error",
-      message: "Internal Server Error",
+      status: 'error',
+      message: 'Internal Server Error',
     });
-  }
+  },
 );
 
-app.listen(5000, () => console.log("Server is running"));
+app.listen(5000, () => console.log('Server is running'));
