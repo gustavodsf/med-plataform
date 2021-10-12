@@ -1,6 +1,7 @@
-import nodemailer from "nodemailer";
 import { google } from "googleapis";
 import { Response } from "express";
+import nodemailer from "nodemailer";
+
 const OAuth2 = google.auth.OAuth2;
 
 class MailerService {

@@ -1,16 +1,16 @@
 import { Route, Switch } from 'react-router-dom'
 
-import { Course }     from '../pages/Course/Course';
-import { CourseList } from '../pages/Study/CourseList'
-import { Home }       from '../pages/Home/Home';
-import { Question }   from '../pages/Question/Question';
-import { Template }   from '../components/Template';
-import { User }       from '../pages/User/User';
-import { Material }   from '../pages/Study/Material';
-import { Query }      from '../pages/Study/Query';
-import { About }      from '../pages/Home/About';
-import { Help }       from '../pages/Home/Help';
-import { Video }       from '../pages/Study/Video';
+import { About }      from '@internal/About';
+import { Course }     from '@course/Course';
+import { CourseList } from '@study/CourseList'
+import { Help }       from '@internal/Help';
+import { Home }       from '@internal/Home';
+import { Material }   from '@study/Material';
+import { Query }      from '@study/Query';
+import { Question }   from '@question/Question';
+import { Template }   from '@components/Template';
+import { User }       from '@user/User';
+import { Video }      from '@study/Video';
 
 
 function Internal() {

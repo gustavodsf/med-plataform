@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { QuestionService } from '../service/QuestionService';
+import { QuestionService } from '@service/QuestionService';
 
 class QuestionController {
 

@@ -1,12 +1,13 @@
 import { Divider } from 'primereact/divider';
-import { CourseService } from '../../service/CourseService';
-import { useState, useEffect, useContext } from 'react'
-import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext'
 import { ProgressSpinner } from 'primereact/progressspinner';
-import logoImg from '../../assets/logo_med_one.jpeg';
+import { useHistory } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react'
 
-import '../../style/course_list.scss';
+import { AuthContext } from '@context/AuthContext'
+import { CourseService } from '@service/CourseService';
+
+import logoImg from '@assets/logo_med_one.jpeg';
+import '@style/course_list.scss';
 
 interface ITopic {
   id: string;

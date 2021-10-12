@@ -1,6 +1,6 @@
 import "shaka-player/dist/controls.css";
 
-import { ShakaPlayer } from "../../components/ShakaPlayer"
+import { ShakaPlayer } from "@components/ShakaPlayer"
 
 
 function Video(){

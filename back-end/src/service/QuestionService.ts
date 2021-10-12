@@ -1,7 +1,7 @@
 import { getRepository } from 'fireorm';
 import _ from "lodash";
 
-import { Question } from '../model/Question';
+import { Question } from '@model/Question';
 
 class QuestionService {
 

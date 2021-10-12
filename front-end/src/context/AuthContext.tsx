@@ -2,8 +2,8 @@ import { ReactNode, createContext } from "react";
 import { Toast } from 'primereact/toast';
 import { useRef, MutableRefObject, useEffect, useState } from 'react';
 
-import { auth , signInWithEmailAndPassword, browserSessionPersistence, setPersistence} from '../service/firebase';
-import { UserService } from '../service/UserService'
+import { auth , signInWithEmailAndPassword, browserSessionPersistence, setPersistence} from '@service/firebase';
+import { UserService } from '@service/UserService'
 
 type IAccess = {
   email: string;

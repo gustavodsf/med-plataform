@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { admin } from '../config/firebase';
+import { admin } from '@config/firebase';
 
 export async function ensureAuthenticated(
   request: Request,

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { TopicService } from '../service/TopicService';
+import { TopicService } from '@service/TopicService';
 
 class TopicController {
 

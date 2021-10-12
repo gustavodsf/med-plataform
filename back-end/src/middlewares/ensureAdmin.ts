@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
-import { admin } from '../config/firebase';
-import { UserService } from '../service/UserService';
+import { admin } from '@config/firebase';
+import { UserService } from '@service/UserService';
 
 export async function ensureAdmin(
   request: Request,

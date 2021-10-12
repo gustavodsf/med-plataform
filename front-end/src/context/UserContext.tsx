@@ -2,9 +2,9 @@ import { ReactNode, createContext } from "react";
 import { Toast } from 'primereact/toast';
 import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
 
-import { auth, createUserWithEmailAndPassword } from '../service/firebase';
-import { SendService } from "../service/SendService";
-import { UserService } from "../service/UserService";
+import { auth, createUserWithEmailAndPassword } from '@service/firebase';
+import { SendService } from "@service/SendService";
+import { UserService } from "@service/UserService";
 
 type IUser = {
   id: string;

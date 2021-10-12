@@ -2,10 +2,11 @@ import { Button } from 'primereact/button';
 import { Checkbox } from 'primereact/checkbox';
 import { classNames } from 'primereact/utils';
 import { confirmDialog } from 'primereact/confirmdialog';
-import { CourseContext } from '../../context/CourseContext';
 import { InputText } from 'primereact/inputtext';
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect, useContext } from 'react';
+
+import { CourseContext } from '@context/CourseContext';
 
 type ITopic = {
   id: string;

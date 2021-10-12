@@ -1,5 +1,5 @@
 import { Collection  } from 'fireorm';
-import { Topic } from './Topic';
+import { Topic } from '@model/Topic';
 
 @Collection()
 class Course {

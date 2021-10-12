@@ -1,7 +1,8 @@
+import { getRepository } from 'fireorm';
 import { runTransaction } from 'fireorm';
-import { getRepository, ISubCollection } from 'fireorm';
-import { Course } from '../model/Course';
-import { Topic } from '../model/Topic';
+
+import { Course } from '@model/Course';
+import { Topic } from '@model/Topic';
 
 class CourseService {
 

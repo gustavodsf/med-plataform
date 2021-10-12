@@ -1,24 +1,38 @@
 {
     "compilerOptions": {
-      "target": "es5",
-      "lib": [
-        "dom",
-        "dom.iterable",
-        "esnext"
-      ],
       "allowJs": true,
-      "skipLibCheck": true,
-      "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
-      "strict": true,
+      "baseUrl": "./",
+      "emitDecoratorMetadata": true,
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
       "forceConsistentCasingInFileNames": true,
-      "noFallthroughCasesInSwitch": true,
-      "module": "esnext",
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
       "isolatedModules": true,
+      "jsx": "react-jsx",
+      "lib": [ "dom", "dom.iterable", "esnext", "es2015"],
+      "module": "commonjs",
+      "moduleResolution": "node",
       "noEmit": true,
-      "jsx": "react-jsx"
+      "noFallthroughCasesInSwitch": true,
+      "outDir": "./dist",
+      "removeComments": true,
+      "resolveJsonModule": true,
+      "skipLibCheck": true,
+      "sourceMap": true,
+      "strict": true,
+      "target": "es6",
+      "paths": {
+        "@assets/*": ["src/assets/*"],
+        "@components/*": ["src/components/*"],
+        "@context/*": ["src/context/*"],
+        "@course/*": ["src/pages/Course/*"],
+        "@internal/*": ["src/pages/Internal/*"],
+        "@question/*": ["src/pages/Question/*"],
+        "@service/*": ["src/service/*"],
+        "@study/*": ["src/pages/Study/*"],
+        "@style/*": ["src/style/*"],
+        "@user/*": ["src/pages/User/*"],
+      }
     },
     "include": [
       "src"

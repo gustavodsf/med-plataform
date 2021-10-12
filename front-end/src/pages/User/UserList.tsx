@@ -3,7 +3,7 @@ import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { useContext } from 'react' 
 
-import { UserContext } from '../../context/UserContext'
+import { UserContext } from '@context/UserContext'
 
 type IUser = {
   id: string;

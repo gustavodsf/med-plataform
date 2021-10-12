@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { pdfjs } from 'react-pdf';
 import { useContext } from 'react'
 
 import 'primereact/resources/themes/rhea/theme.css';
@@ -6,14 +7,12 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import 'react-pdf/dist/umd/Page/AnnotationLayer.css';
-
 import "./service/firebase";
 
-import { Internal } from './pages/Internal';
-import { Login } from './pages/Login';
-import { NotFound } from './pages/NotFound';
-import { AuthContextProvider, AuthContext } from './context/AuthContext';
-import { pdfjs } from 'react-pdf';
+import { Internal } from '@internal/Internal';
+import { Login } from '@internal/Login';
+import { NotFound } from '@internal/NotFound';
+import { AuthContextProvider, AuthContext } from '@context/AuthContext';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 

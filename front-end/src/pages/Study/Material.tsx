@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
 import { Button } from 'primereact/button';
-import { useParams } from "react-router-dom";
-import { TopicService } from '../../service/TopicService';
-import { Document, Page } from 'react-pdf';
 import { Divider } from 'primereact/divider';
-import { auth } from '../../service/firebase';
+import { Document, Page } from 'react-pdf';
 import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
+import { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 
-import '../../style/pdf.scss';
+import { auth } from '@service/firebase';
+import { TopicService } from '@service/TopicService';
+
+import '@style/pdf.scss';
 
 type MaterialParams = {
   id: string;

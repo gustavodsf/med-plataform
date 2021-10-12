@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CourseService } from '../service/CourseService';
+import { CourseService } from '@service/CourseService';
 
 class CourseController {
 

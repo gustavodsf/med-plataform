@@ -2,9 +2,9 @@ import { Divider } from 'primereact/divider';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { useContext } from 'react'
 
-import { QuestionContext, QuestionContextProvider } from '../../context/QuestionContext'
-import { QuestionForm } from './QuestionForm';
-import { QuestionList } from './QuestionList';
+import { QuestionContext, QuestionContextProvider } from '@context/QuestionContext'
+import { QuestionForm } from '@question/QuestionForm';
+import { QuestionList } from '@question/QuestionList';
 
 export function Question(){
   /*

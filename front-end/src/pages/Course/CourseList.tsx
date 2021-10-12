@@ -1,8 +1,9 @@
 import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
-import { CourseContext } from '../../context/CourseContext';
 import { DataTable } from 'primereact/datatable';
 import { useContext } from 'react';
+
+import { CourseContext } from '@context/CourseContext';
 
 interface ITopic {
   id: string;

@@ -1,4 +1,3 @@
-
 import { Collection } from 'fireorm';
 
 @Collection()

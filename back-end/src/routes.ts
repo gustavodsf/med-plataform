@@ -1,26 +1,26 @@
 import { Router } from "express";
-import { SendEmailController } from "./controller/SendEmailController";
-import { UserController } from "./controller/UserController";
-import { CourseController } from "./controller/CourseController";
-import { QuestionController } from "./controller/QuestionController";
-import { TopicController } from './controller/TopicController';
-import { PdfController } from './controller/PdfController';
-import { VideoController } from './controller/VideoController';
-import { AnswerController } from './controller/AnswerController';
 
-import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
-import { ensureAdmin } from "./middlewares/ensureAdmin";
+import { ensureAdmin } from "@middlewares/ensureAdmin";
+import { ensureAuthenticated } from "@middlewares/ensureAuthenticated";
+
+import { AnswerController } from '@controller/AnswerController';
+import { CourseController } from "@controller/CourseController";
+import { PdfController } from '@controller/PdfController';
+import { QuestionController } from "@controller/QuestionController";
+import { SendEmailController } from "@controller/SendEmailController";
+import { TopicController } from '@controller/TopicController';
+import { UserController } from "@controller/UserController";
+import { VideoController } from '@controller/VideoController';
 
 const router = Router();
 
-const sendEmailController = new SendEmailController();
-
-const userController = new UserController();
-const courseController = new CourseController();
-const questionController = new QuestionController();
-const topicController = new TopicController();
-const pdfController = new PdfController();
 const answerController = new AnswerController();
+const courseController = new CourseController();
+const pdfController = new PdfController();
+const questionController = new QuestionController();
+const sendEmailController = new SendEmailController();
+const topicController = new TopicController();
+const userController = new UserController();
 const videoController = new VideoController();
 
 // ***********
@@ -31,7 +31,6 @@ router.get("/user/:id",    ensureAdmin, userController.getById);
 router.put("/user",        ensureAdmin, userController.updateUser);
 router.post("/user",       ensureAdmin, userController.addUser);
 router.delete("/user/:id", ensureAdmin, userController.deleteUser);
-
 // ***********
 //  Curso
 // ***********
@@ -40,7 +39,6 @@ router.get("/course/:id",    ensureAdmin, courseController.getById);
 router.put("/course",        ensureAdmin, courseController.updateCourse);
 router.post("/course",       ensureAdmin, courseController.addCourse);
 router.delete("/course/:id", ensureAdmin, courseController.deleteCourse);
-
 // ***********
 //  Question
 // ***********
@@ -57,19 +55,16 @@ router.delete("/question/:id",            ensureAdmin, questionController.delete
 router.get("/topic/",          ensureAdmin, topicController.getAll);
 router.get("/topic/course/:courseId", ensureAdmin, topicController.getCourseId);
 router.get("/topic/:id", ensureAdmin, topicController.getById);
-
 // ***********
 //  Email
 // ***********
 router.post("/send/email",         ensureAdmin, sendEmailController.handle);
 router.post("/send/welcome/email", ensureAdmin, sendEmailController.sendCreateUserMessage);
-
 // ***********
 //  files
 // ***********
 router.get("/pdf/:fileName", ensureAuthenticated, pdfController.getPdfWithName);
 router.get("/video/:fileName", videoController.getVideoWithName);
-
 // ***********
 // answer
 // ***********

@@ -1,4 +1,3 @@
-import { CourseService } from '../service/CourseService';
 import { 
   ReactNode,
   createContext,
@@ -9,6 +8,8 @@ import {
   SetStateAction
 } from "react";
 import { Toast } from 'primereact/toast';
+
+import { CourseService } from '@service/CourseService';
 
 interface ITopic {
   id: string;

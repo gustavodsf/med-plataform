@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AnswerService } from '../service/AnswerService';
+import { AnswerService } from '@service/AnswerService';
 
 class AnswerController {
 

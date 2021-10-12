@@ -3,7 +3,7 @@ import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { useContext } from 'react';
 
-import { QuestionContext } from '../../context/QuestionContext'
+import { QuestionContext } from '@context/QuestionContext'
 
 type IQuestion = {
   answer: number;

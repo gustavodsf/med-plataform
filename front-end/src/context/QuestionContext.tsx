@@ -2,7 +2,7 @@ import { ReactNode, createContext } from "react";
 import { Toast } from 'primereact/toast';
 import { useEffect, useState, useRef, Dispatch, SetStateAction  } from 'react';
 
-import { QuestionService } from '../service/QuestionService';
+import { QuestionService } from '@service/QuestionService';
 
 type IQuestion = {
   answer: number;

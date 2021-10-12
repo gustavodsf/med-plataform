@@ -6,12 +6,12 @@ import { Divider } from 'primereact/divider';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
-import { CourseService } from '../../service/CourseService';
+import { PickList, PickListChangeParams } from 'primereact/picklist';
 import { useEffect, useContext, useState} from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { PickList, PickListChangeParams } from 'primereact/picklist';
 
-import { UserContext } from '../../context/UserContext'
+import { CourseService } from '@service/CourseService';
+import { UserContext } from '@context/UserContext'
 
 interface ICourse {
   id: string;

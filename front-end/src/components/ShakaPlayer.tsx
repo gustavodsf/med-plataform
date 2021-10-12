@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, ReactChild, RefObject } from "react";
+import { useRef, useState, useEffect, ReactChild } from "react";
 
 import "shaka-player/dist/controls.css";
 const shaka = require("shaka-player/dist/shaka-player.ui.js");

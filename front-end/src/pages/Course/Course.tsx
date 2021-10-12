@@ -1,10 +1,10 @@
-import { CourseForm } from './CourseForm';
-import { CourseList } from './CourseList';
 import { Divider } from 'primereact/divider';
-import { useContext } from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { useContext } from 'react';
 
-import { CourseContextProvider, CourseContext } from '../../context/CourseContext'
+import { CourseForm } from '@course/CourseForm';
+import { CourseList } from '@course/CourseList';
+import { CourseContextProvider, CourseContext } from '@context/CourseContext'
 
 export function Course(){
   /*

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { MailerService }  from "../service/MailerService";
+import { MailerService }  from "@service/MailerService";
 
 class SendEmailController {
   async handle(request: Request, response: Response) {

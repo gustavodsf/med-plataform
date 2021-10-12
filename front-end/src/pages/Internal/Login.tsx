@@ -1,17 +1,18 @@
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { Dialog } from 'primereact/dialog';
-import { auth, sendPasswordResetEmail, } from '../service/firebase';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useForm, Controller } from 'react-hook-form';
 import { useHistory } from 'react-router-dom'
 import { useState, useContext, useEffect } from 'react';
 
-import { AuthContext } from '../context/AuthContext'
-import logoImg from '../assets/logo_med_one.png';
+import { auth, sendPasswordResetEmail, } from '@service/firebase';
+import { AuthContext } from '@context/AuthContext';
 
-import '../style/auth.scss';
+import logoImg from '@assets/logo_med_one.png';
+
+import '@style/auth.scss';
 
 type IAccess = {
   email: string;

@@ -1,7 +1,7 @@
 
 import { getRepository } from 'fireorm';
 
-import { User } from '../model/User';
+import { User } from '@model/User';
 
 class UserService {
 

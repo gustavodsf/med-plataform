@@ -4,19 +4,20 @@ import {
   useParams
 } from "react-router-dom";
 
-import { AnswerService } from '../../service/AnswerService';
-import { AuthContext } from '../../context/AuthContext'
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Divider } from 'primereact/divider';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { QuestionService } from '../../service/QuestionService';
 import { RadioButton, RadioButtonChangeParams } from 'primereact/radiobutton';
 import { Toast } from 'primereact/toast';
 import { Tooltip } from 'primereact/tooltip';
 import { useState, useEffect, useContext, useRef } from 'react';
 
-import '../../style/query.scss';
+import { AnswerService } from '@service/AnswerService';
+import { AuthContext } from '@context/AuthContext'
+import { QuestionService } from '@service/QuestionService';
+
+import '@style/query.scss';
 
 type IQuestion = {
   answer: number;

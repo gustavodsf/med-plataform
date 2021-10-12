@@ -2,10 +2,10 @@ import { Menubar } from 'primereact/menubar';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 
-import { AuthContext } from '../context/AuthContext'
-import logo from '../assets/logo_med_one.jpeg';
+import { AuthContext } from '@context/AuthContext'
+import logo from '@assets/logo_med_one.jpeg';
 
-import '../style/template.scss';
+import '@style/template.scss';
 
 type TemplateProps = {
   children: JSX.Element;

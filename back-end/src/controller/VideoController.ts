@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import { admin } from '../config/firebase';
+import { admin } from '@config/firebase';
 
 const https = require('https');
-import { Buffer } from 'buffer';
 
 class VideoController {
 

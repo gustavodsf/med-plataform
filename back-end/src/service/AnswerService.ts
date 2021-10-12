@@ -1,6 +1,5 @@
-import { runTransaction } from 'fireorm';
-import { getRepository, ISubCollection } from 'fireorm';
-import { Answer } from '../model/Answer';
+import { getRepository } from 'fireorm';
+import { Answer } from '@model/Answer';
 
 class AnswerService {
 

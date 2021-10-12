@@ -1,6 +1,6 @@
-import logoImg from '../assets/logo_med_one.png';
+import logoImg from '@assets/logo_med_one.png';
 
-import '../style/auth.scss';
+import '@style/auth.scss';
 
 function NotFound(){
   /*

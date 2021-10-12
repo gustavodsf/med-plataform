@@ -1,6 +1,6 @@
 import { getRepository } from 'fireorm';
 
-import { Topic } from '../model/Topic';
+import { Topic } from '@model/Topic';
 
 class TopicService {
 

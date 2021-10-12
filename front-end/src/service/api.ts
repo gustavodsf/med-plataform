@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { auth } from './firebase';
+import { auth } from '@service/firebase';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND

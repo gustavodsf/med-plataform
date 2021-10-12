@@ -1,17 +1,17 @@
 import { Button } from 'primereact/button';
+import { Checkbox } from 'primereact/checkbox';
 import { classNames } from 'primereact/utils';
 import { confirmDialog } from 'primereact/confirmdialog';
+import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
-import {Chips} from 'primereact/chips';
-import { useState, useEffect, useContext } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Dropdown } from 'primereact/dropdown';
-import { Checkbox } from 'primereact/checkbox';
+import { useState, useEffect, useContext } from 'react';
+import {Chips} from 'primereact/chips';
 
-import { QuestionContext } from '../../context/QuestionContext'
-import { CourseService } from '../../service/CourseService';
-import { TopicService } from '../../service/TopicService';
+import { QuestionContext } from '@context/QuestionContext'
+import { CourseService } from '@service/CourseService';
+import { TopicService } from '@service/TopicService';
 
 interface ITopic {
   id: string;
