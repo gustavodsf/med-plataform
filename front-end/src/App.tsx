@@ -1,13 +1,13 @@
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { pdfjs } from 'react-pdf';
-import { useContext } from 'react'
+import { useContext } from 'react';
 
 import 'primereact/resources/themes/rhea/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import 'react-pdf/dist/umd/Page/AnnotationLayer.css';
-import "./service/firebase";
+import './service/firebase';
 
 import { Internal } from '@internal/Internal';
 import { Login } from '@internal/Login';
@@ -31,19 +31,20 @@ const PrivateRoute = (props: any) => {
 };
 
 function App() {
-  return(<>
-    <AuthContextProvider>
-      <BrowserRouter>
-        <Switch>      
-            <Route exact path="/login" component={Login} />        
+  return (
+    <>
+      <AuthContextProvider>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/login" component={Login} />
             <PrivateRoute path="/app" component={Internal} />
             <Redirect exact from="/" to="/login" />
             <Route path="*" component={NotFound} />
-        </Switch>
-      </BrowserRouter>
-    </AuthContextProvider>
-    
-  </>);
+          </Switch>
+        </BrowserRouter>
+      </AuthContextProvider>
+    </>
+  );
 }
 
 export default App;
