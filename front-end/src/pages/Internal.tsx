@@ -10,6 +10,7 @@ import { Material }   from '../pages/Study/Material';
 import { Query }      from '../pages/Study/Query';
 import { About }      from '../pages/Home/About';
 import { Help }       from '../pages/Home/Help';
+import { Video }       from '../pages/Study/Video';
 
 
 function Internal() {
@@ -31,6 +32,8 @@ function Internal() {
           <CourseList redictFor="question" />
         </Route>
         <Route exact path="/app/study/question/:id" component={Query} />
+        <Route exact path="/app/study/video" component={Video} />
+        
         <Route exact path="/app/study/simulated">
           <CourseList redictFor="simulated" />
         </Route>
