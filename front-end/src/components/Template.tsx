@@ -2,143 +2,135 @@ import { Menubar } from 'primereact/menubar';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 
-import { AuthContext } from '@context/AuthContext'
+import { AuthContext } from '@context/AuthContext';
 import logo from '@assets/logo_med_one.jpeg';
 
 import '@style/template.scss';
 
 type TemplateProps = {
   children: JSX.Element;
-}
+};
 
-function Template(props:TemplateProps) {
+function Template(props: TemplateProps) {
   const history = useHistory();
-   /*
-  **Framework Variables
-  */
+  /*
+   **Framework Variables
+   */
   const { user, handleLogout } = useContext(AuthContext);
 
   /*
-  **Model Variables
-  */
-  
+   **Model Variables
+   */
 
   /*
-  **Local Variables
-  */
-  const start = <img alt="logo" src={logo}  height="40" className="p-mr-2"></img>
+   **Local Variables
+   */
+  const start = (
+    <img alt="logo" src={logo} height="40" className="p-mr-2"></img>
+  );
   const adminMenu = {
     label: 'Configuração',
     icon: 'pi pi-fw pi-cog',
-    items:[
+    items: [
       {
-        label:'Usuários',
-        icon:'pi pi-fw pi-users',
-        command: ()=> history.push('/app/user')
+        label: 'Usuários',
+        icon: 'pi pi-fw pi-users',
+        command: () => history.push('/app/user'),
       },
       {
-        label:'Questões',
-        icon:'pi pi-fw pi-comment',
-        command: ()=> history.push('/app/question')
+        label: 'Questões',
+        icon: 'pi pi-fw pi-comment',
+        command: () => history.push('/app/question'),
       },
       {
-        label:'Cursos',
-        icon:'pi pi-fw pi-book',
-        command: ()=> history.push('/app/course')
-      }
-    ]
+        label: 'Cursos',
+        icon: 'pi pi-fw pi-book',
+        command: () => history.push('/app/course'),
+      },
+    ],
   };
 
   const userMenu = {
     label: 'Estudo',
     icon: 'pi pi-fw pi-bookmark',
-    items:[
+    items: [
       {
-        label:'Vídeos',
-        icon:'pi pi-fw pi-youtube',
-        command: () => history.push('/app/study/video')
-        
+        label: 'Vídeos',
+        icon: 'pi pi-fw pi-youtube',
+        command: () => history.push('/app/study/video'),
       },
       {
-        label:'Material',
-        icon:'pi pi-fw pi-file-o',
-        command: () => history.push('/app/study/material')
+        label: 'Material',
+        icon: 'pi pi-fw pi-file-o',
+        command: () => history.push('/app/study/material'),
       },
       {
-        label:'Questionário',
-        icon:'pi pi-fw pi-list',
-        command: () => history.push('/app/study/question')
+        label: 'Questionário',
+        icon: 'pi pi-fw pi-list',
+        command: () => history.push('/app/study/question'),
       },
       {
-        label:'Simulado',
-        icon:'pi pi-fw pi-compass',
-        command: () => history.push('/app/study/simulated')
-      }
-    ]
-  }
+        label: 'Simulado',
+        icon: 'pi pi-fw pi-compass',
+        command: () => history.push('/app/study/simulated'),
+      },
+    ],
+  };
   /*
-  **Get values from state
-  */
+   **Get values from state
+   */
 
   /*
-  **Local Methods
-  */
+   **Local Methods
+   */
   const items = [];
   items.push({
     label: 'Home',
     icon: 'pi pi-fw pi-home',
-    command: () => history.push('/app')
-  })
-  if(user === undefined) {
+    command: () => history.push('/app'),
+  });
+  if (user === undefined) {
     history.push('/login');
-    
   } else {
-    if(user.profile === 'admin'){
+    if (user.profile === 'admin') {
       items.push(adminMenu);
-    } 
+    }
   }
   items.push(userMenu);
   items.push(
-    
     {
       label: 'Ajuda',
       icon: 'pi pi-fw pi-question-circle',
-      command: () => history.push('/app/help')
+      command: () => history.push('/app/help'),
     },
     {
       label: 'Sobre Nós',
       icon: 'pi pi-fw pi-info-circle',
-      command: () => history.push('/app/about')
+      command: () => history.push('/app/about'),
     },
     {
       label: 'Sair',
       icon: 'pi pi-fw pi-power-off',
-      command: () => handleLogout()
-    }
-
+      command: () => handleLogout(),
+    },
   );
   /*
-  **React Methods
-  */
+   **React Methods
+   */
 
   /*
-  **Event Handler
-  */
+   **Event Handler
+   */
   return (
     <>
       <div className="container">
         <div className="header">
-          <Menubar 
-            start={start}
-            model={items}
-          />
+          <Menubar start={start} model={items} />
         </div>
-        <div className="body">
-          { props.children }
-        </div>
+        <div className="body">{props.children}</div>
       </div>
     </>
-  ) 
+  );
 }
 
-export { Template } 
+export { Template };

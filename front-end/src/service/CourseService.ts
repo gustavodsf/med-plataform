@@ -15,7 +15,6 @@ interface ICourse {
 }
 
 class CourseService {
-
   async save(data: ICourse) {
     return await api.post('/course', data);
   }
@@ -23,16 +22,16 @@ class CourseService {
   async update(data: ICourse) {
     return await api.put('/course', data);
   }
-    
-  async getAllData() : Promise<Array<ICourse>> {
-    const { data } =  await api.get('/course');
+
+  async getAllData(): Promise<Array<ICourse>> {
+    const { data } = await api.get<Array<ICourse>>('/course');
     return data;
-  } 
+  }
 
   async delete(id: string) {
-    const { data } =  await api.delete(`/course/${id}`);
+    const { data } = await api.delete(`/course/${id}`);
     return data;
-  }  
+  }
 }
 
-export { CourseService }
+export { CourseService };

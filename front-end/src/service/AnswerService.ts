@@ -11,16 +11,19 @@ interface IAnswer {
 }
 
 class AnswerService {
-
   async save(data: IAnswer) {
     return await api.post('/answer', data);
   }
 
-  async getAnwserByUserAndTopic(user_id: string, topic_id: string) : Promise<Array<IAnswer>> {
-    const { data } = await api.get(`/answer/${user_id}/${topic_id}`);
+  async getAnwserByUserAndTopic(
+    user_id: string,
+    topic_id: string,
+  ): Promise<Array<IAnswer>> {
+    const { data } = await api.get<Array<IAnswer>>(
+      `/answer/${user_id}/${topic_id}`,
+    );
     return data;
   }
-
 }
 
-export { AnswerService }
+export { AnswerService };

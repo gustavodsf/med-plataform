@@ -3,7 +3,7 @@ import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { useContext } from 'react';
 
-import { QuestionContext } from '@context/QuestionContext'
+import { QuestionContext } from '@context/QuestionContext';
 
 type IQuestion = {
   answer: number;
@@ -13,68 +13,74 @@ type IQuestion = {
   options: Array<string>;
   proof: string;
   question: string;
-  simulated: boolean
+  simulated: boolean;
   theme: Array<string>;
   topic_id: string;
-  utterance: string
-}
+  utterance: string;
+};
 
-export function QuestionList(){
+export function QuestionList() {
+  /*
+   **Framework Variables
+   */
+  const { questionSelected, setQuestionSelected, questionList } =
+    useContext(QuestionContext);
 
   /*
-  **Framework Variables
-  */
- const { questionSelected, setQuestionSelected, questionList } = useContext(QuestionContext);
+   **Model Variables
+   */
 
   /*
-  **Model Variables
-  */
+   **Local Variables
+   */
+  const paginatorLeft = (
+    <Button type="button" icon="pi pi-refresh" className="p-button-text" />
+  );
+  const paginatorRight = (
+    <Button type="button" icon="pi pi-cloud" className="p-button-text" />
+  );
 
   /*
-  **Local Variables
-  */
-  const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
-  const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
+   **Get values from state
+   */
 
   /*
-  **Get values from state
-  */
-
-  /*
-  **Local Methods
-  */
+   **Local Methods
+   */
   const simulatedBodyTemplate = (rowData: IQuestion) => {
-    if(rowData.simulated){
-      return "Sim";
+    if (rowData.simulated) {
+      return 'Sim';
     }
-    return "Não";
-  }
+    return 'Não';
+  };
   /*
-  **React Methods
-  */
+   **React Methods
+   */
 
   /*
-  **Event Handler
-  */
-  return (<DataTable
-    currentPageReportTemplate="Exibindo {first} de {last} até {totalRecords}" 
-    dataKey="id"
-    emptyMessage="Não foram encontradas questões"
-    onSelectionChange={e => setQuestionSelected(e.value)}
-    paginator
-    paginatorLeft={paginatorLeft}
-    paginatorRight={paginatorRight}
-    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-    rows={10} 
-    rowsPerPageOptions={[10,20,30]}
-    selection={questionSelected}
-    selectionMode="radiobutton"
-    value={questionList}
-  >
-      <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
+   **Event Handler
+   */
+  return (
+    <DataTable
+      currentPageReportTemplate="Exibindo {first} de {last} até {totalRecords}"
+      dataKey="id"
+      emptyMessage="Não foram encontradas questões"
+      onSelectionChange={(e) => setQuestionSelected(e.value)}
+      paginator
+      paginatorLeft={paginatorLeft}
+      paginatorRight={paginatorRight}
+      paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+      rows={10}
+      rowsPerPageOptions={[10, 20, 30]}
+      selection={questionSelected}
+      selectionMode="radiobutton"
+      value={questionList}
+    >
+      <Column selectionMode="single" headerStyle={{ width: '3em' }}></Column>
       <Column field="proof" header="Prova"></Column>
       <Column field="theme" header="Tema"></Column>
       <Column field="question" header="Questão"></Column>
       <Column header="Simulado" body={simulatedBodyTemplate}></Column>
-  </DataTable>);
+    </DataTable>
+  );
 }

@@ -1,7 +1,5 @@
-function Help(){
-  return(<>
-   Help
-  </>)
+function Help() {
+  return <>Help</>;
 }
 
-export { Help }
+export { Help };

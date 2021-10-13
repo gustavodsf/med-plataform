@@ -1,7 +1,5 @@
-function About(){
-  return(<>
-    Sobre o Med One!
-  </>)
+function About() {
+  return <>Sobre o Med One!</>;
 }
 
-export { About }
+export { About };

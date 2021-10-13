@@ -1,7 +1,5 @@
-function Home(){
-  return(<>
-    Minha Home
-  </>)
+function Home() {
+  return <>Minha Home</>;
 }
 
-export { Home }
+export { Home };

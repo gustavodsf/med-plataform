@@ -19,43 +19,50 @@ interface ICourse {
   topics: Array<ITopic>;
 }
 
-export function CourseList(){
-  const { courseList, courseSelected, setCourseSelected } = useContext(CourseContext);
+export function CourseList() {
+  const { courseList, courseSelected, setCourseSelected } =
+    useContext(CourseContext);
 
-  const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
-  const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
+  const paginatorLeft = (
+    <Button type="button" icon="pi pi-refresh" className="p-button-text" />
+  );
+  const paginatorRight = (
+    <Button type="button" icon="pi pi-cloud" className="p-button-text" />
+  );
 
   const topicBodyTemplate = (rowData: ICourse) => {
-    return rowData.topics.map(t => t.name).join();
-  }
+    return rowData.topics.map((t) => t.name).join();
+  };
 
   const enabledBodyTemplate = (rowData: ICourse) => {
-    if(rowData.enabled){
-      return "Sim";
+    if (rowData.enabled) {
+      return 'Sim';
     }
-    return "Não";
-  }
+    return 'Não';
+  };
 
-  return(<>
+  return (
+    <>
       <DataTable
-        currentPageReportTemplate="Exibindo {first} de {last} até {totalRecords}" 
+        currentPageReportTemplate="Exibindo {first} de {last} até {totalRecords}"
         dataKey="id"
         emptyMessage="Nenhum curso foi encontrado."
-        onSelectionChange={e => setCourseSelected(e.value)}
+        onSelectionChange={(e) => setCourseSelected(e.value)}
         paginator
         paginatorLeft={paginatorLeft}
         paginatorRight={paginatorRight}
         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-        rows={10} 
-        rowsPerPageOptions={[10,20,30]}
+        rows={10}
+        rowsPerPageOptions={[10, 20, 30]}
         selection={courseSelected}
         selectionMode="radiobutton"
         value={courseList}
-    >
-      <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
-      <Column field="name" header="Nome"></Column>
-      <Column header="Tópico" body={topicBodyTemplate}></Column>
-      <Column header="Habilitado" body={enabledBodyTemplate}></Column>
-    </DataTable>
-  </>)
+      >
+        <Column selectionMode="single" headerStyle={{ width: '3em' }}></Column>
+        <Column field="name" header="Nome"></Column>
+        <Column header="Tópico" body={topicBodyTemplate}></Column>
+        <Column header="Habilitado" body={enabledBodyTemplate}></Column>
+      </DataTable>
+    </>
+  );
 }

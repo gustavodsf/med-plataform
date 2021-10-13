@@ -4,60 +4,61 @@ import { useContext } from 'react';
 
 import { CourseForm } from '@course/CourseForm';
 import { CourseList } from '@course/CourseList';
-import { CourseContextProvider, CourseContext } from '@context/CourseContext'
+import { CourseContextProvider, CourseContext } from '@context/CourseContext';
 
-export function Course(){
+export function Course() {
   /*
-  **Framework Variables
-  */
+   **Framework Variables
+   */
   const { loading } = useContext(CourseContext);
   /*
-  **Model Variables
-  */
- 
-  /*
-  **Local Variables
-  */
-  
-  /*
-  **Get values from state
-  */
+   **Model Variables
+   */
 
   /*
-  **Local Methods
-  */
- 
+   **Local Variables
+   */
 
   /*
-  **React Methods
-  */
- 
+   **Get values from state
+   */
+
   /*
-  **Event Handler
-  */
+   **Local Methods
+   */
+
+  /*
+   **React Methods
+   */
+
+  /*
+   **Event Handler
+   */
 
   return (
     <CourseContextProvider>
       <Divider align="center">
-        <span className="my-page-header">Formulário do Curso</span> 
+        <span className="my-page-header">Formulário do Curso</span>
       </Divider>
-     
-      {
-        loading ? (<ProgressSpinner 
-          style={{width: '30px', height: '30px'}}
+
+      {loading ? (
+        <ProgressSpinner
+          style={{ width: '30px', height: '30px' }}
           strokeWidth="8"
           animationDuration="1s"
-        />) : (<></>)
-      }
-      <div className="my-from"> 
+        />
+      ) : (
+        <></>
+      )}
+      <div className="my-from">
         <CourseForm />
       </div>
-      <Divider align="center" >
-        <span className="my-page-header">Lista de Curso</span> 
+      <Divider align="center">
+        <span className="my-page-header">Lista de Curso</span>
       </Divider>
-      <div className="my-list"> 
+      <div className="my-list">
         <CourseList />
       </div>
     </CourseContextProvider>
-  )
+  );
 }

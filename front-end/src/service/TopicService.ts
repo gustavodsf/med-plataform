@@ -8,14 +8,13 @@ interface ITopic {
 }
 
 class TopicService {
-
-  async getAllData() : Promise<Array<ITopic>> {
-    const { data } =  await api.get('/topic');
+  async getAllData(): Promise<Array<ITopic>> {
+    const { data } = await api.get<Array<ITopic>>('/topic');
     return data;
-  }  
+  }
 
-  async getTopicById(id: string) : Promise<ITopic> {
-    const { data } =  await api.get(`/topic/${id}`);
+  async getTopicById(id: string): Promise<ITopic> {
+    const { data } = await api.get<ITopic>(`/topic/${id}`);
     return data;
   }
 }
